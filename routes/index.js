@@ -12,6 +12,7 @@ const costController         = require('../controllers/costController');
 const chatController         = require('../controllers/chatController');
 const hotelController        = require('../controllers/hotelController');
 const packagesController     = require('../controllers/packagesController');
+const galleryController      = require('../controllers/galleryController');
 
 // Pages
 router.get('/',             homeController.index);
@@ -23,6 +24,7 @@ router.get('/contact',      contactController.index);
 router.get('/booking',      bookingController.index);
 router.get('/hotels',       hotelController.index);
 router.get('/packages',     packagesController.index);
+router.get('/gallery',      galleryController.index);
 
 // Data APIs
 router.get('/api/destinations',  destinationsController.getAll);

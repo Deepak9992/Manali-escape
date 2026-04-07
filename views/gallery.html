@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery – Manali Escape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0f2744;--orange:#e67e22;--light:#f5f7fa;--muted:#6b7280;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;color:#2c3e50;background:var(--light);}
+    nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(15,39,68,0.97);backdrop-filter:blur(10px);padding:0 40px;height:90px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .logo{text-decoration:none;display:flex;align-items:center;gap:8px;}
+    nav ul{list-style:none;display:flex;gap:4px;flex-wrap:wrap;}
+    nav ul a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.85rem;font-weight:500;padding:7px 12px;border-radius:6px;transition:all .2s;}
+    nav ul a:hover,nav ul a.active{color:#fff;background:rgba(255,255,255,0.1);}
+
+    .hero{height:40vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:90px;}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1600') center/cover;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,39,68,0.8),rgba(15,39,68,0.45));}
+    .hero-content{position:relative;z-index:2;text-align:center;color:#fff;animation:fadeUp .9s ease both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+    .badge{display:inline-block;background:rgba(230,126,34,0.9);color:#fff;padding:5px 16px;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+    .hero-content h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:10px;}
+    .hero-content p{font-size:1rem;color:rgba(255,255,255,0.8);}
+
+    .container{max-width:1300px;margin:0 auto;padding:50px 32px;}
+
+    /* Filter tabs */
+    .filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;}
+    .filter-btn{padding:9px 22px;border:2px solid #e5e7eb;background:#fff;border-radius:30px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;color:var(--muted);transition:all .2s;}
+    .filter-btn:hover{border-color:var(--orange);color:var(--orange);}
+    .filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+    /* Masonry grid */
+    .gallery-grid{columns:4;column-gap:16px;}
+    @media(max-width:1100px){.gallery-grid{columns:3;}}
+    @media(max-width:720px){.gallery-grid{columns:2;}}
+    @media(max-width:480px){.gallery-grid{columns:1;}}
+
+    .gallery-item{break-inside:avoid;margin-bottom:16px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+    .gallery-item.visible{opacity:1;transform:none;}
+    .gallery-item img{width:100%;display:block;transition:transform .4s ease;}
+    .gallery-item:hover img{transform:scale(1.05);}
+    .gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;}
+    .gallery-item:hover .gallery-item-overlay{opacity:1;}
+    .gallery-item-label{position:absolute;bottom:0;left:0;right:0;padding:16px;color:#fff;font-size:0.82rem;font-weight:600;transform:translateY(8px);transition:transform .3s;opacity:0;}
+    .gallery-item:hover .gallery-item-label{transform:none;opacity:1;}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;}
+    .lightbox.open{display:flex;}
+    .lb-img-wrap{position:relative;max-width:90vw;max-height:88vh;animation:lbIn .25s ease;}
+    @keyframes lbIn{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:none}}
+    .lb-img-wrap img{max-width:90vw;max-height:80vh;border-radius:12px;object-fit:contain;display:block;}
+    .lb-caption{color:rgba(255,255,255,0.8);text-align:center;margin-top:14px;font-size:0.9rem;}
+    .lb-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;z-index:3001;line-height:1;}
+    .lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:1.8rem;cursor:pointer;padding:12px 18px;border-radius:8px;transition:background .2s;z-index:3001;}
+    .lb-prev{left:16px;} .lb-next{right:16px;}
+    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,0.3);}
+    .lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.85rem;}
+
+    footer{background:var(--navy);color:rgba(255,255,255,0.55);padding:56px 48px 32px;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px;max-width:1200px;margin:0 auto 40px;}
+    .footer-col h4{color:#fff;font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:16px;}
+    .footer-col p,.footer-col a{color:rgba(255,255,255,0.55);font-size:0.84rem;line-height:1.8;text-decoration:none;display:block;transition:color .2s;}
+    .footer-col a:hover{color:#e67e22;}
+    .footer-col .footer-logo-img{height:60px;width:auto;mix-blend-mode:lighten;margin-bottom:12px;}
+    .footer-address{font-style:normal;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;text-align:center;font-size:0.8rem;color:rgba(255,255,255,0.35);max-width:1200px;margin:0 auto;}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/destinations">Destinations</a></li>
+    <li><a href="/adventure">Adventure</a></li>
+    <li><a href="/heritage">Heritage</a></li>
+    <li><a href="/hotels">Hotels</a></li>
+    <li><a href="/packages">Packages</a></li>
+    <li><a href="/gallery" class="active">Gallery</a></li>
+    <li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="badge">Visual Journey</div>
+    <h1>Gallery</h1>
+    <p>Breathtaking moments from across Himachal Pradesh</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all">All Photos</button>
+    <button class="filter-btn" data-cat="landscapes">Landscapes</button>
+    <button class="filter-btn" data-cat="adventure">Adventure</button>
+    <button class="filter-btn" data-cat="heritage">Heritage</button>
+    <button class="filter-btn" data-cat="culture">Culture</button>
+    <button class="filter-btn" data-cat="wildlife">Wildlife & Nature</button>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <button class="lb-prev" onclick="changeLB(-1)">‹</button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt=""/>
+    <div class="lb-caption" id="lb-caption"></div>
+  </div>
+  <button class="lb-next" onclick="changeLB(1)">›</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><img src="/images/logo.png" alt="Manali Escape" class="footer-logo-img"/><p>Your gateway to the breathtaking landscapes and vibrant culture of Himachal Pradesh.</p></div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="/">Home</a><a href="/destinations">Destinations</a><a href="/hotels">Hotels</a><a href="/packages">Packages</a><a href="/gallery">Gallery</a><a href="/booking">Book Trip</a></div>
+    <div class="footer-col"><h4>Explore</h4><a href="/destinations">Manali</a><a href="/destinations">Shimla</a><a href="/destinations">Spiti Valley</a><a href="/destinations">Dharamshala</a><a href="/destinations">Kasol</a></div>
+    <div class="footer-col"><h4>Tourism Office</h4><address class="footer-address"><p>📍 Ward No. 4, Village Siyal</p><p>Post Office Manali, PIN 175131</p><p>Himachal Pradesh, India</p><p style="margin-top:10px;">📞 <a href="tel:+919805549992">+91 98055 49992</a></p><p>🌐 <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p></address></div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Manali Escape. All rights reserved.</div>
+</footer>
+
+<script src="/chatbox.js"></script>
+<script>
+var photos = [
+  {src:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800',cat:'landscapes',label:'Manali Valley'},
+  {src:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',cat:'landscapes',label:'Spiti Valley'},
+  {src:'https://images.unsplash.com/photo-1597074866923-dc0589150358?w=800',cat:'landscapes',label:'Shimla Hills'},
+  {src:'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800',cat:'heritage',label:'Dharamshala Monastery'},
+  {src:'https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=800',cat:'landscapes',label:'Kasol — Parvati Valley'},
+  {src:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800',cat:'landscapes',label:'Snow-capped Peaks'},
+  {src:'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800',cat:'adventure',label:'Trekking in Himachal'},
+  {src:'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800',cat:'adventure',label:'Paragliding at Bir Billing'},
+  {src:'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',cat:'culture',label:'Local Festival'},
+  {src:'https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800',cat:'heritage',label:'Ancient Temple'},
+  {src:'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=800',cat:'landscapes',label:'Mountain Sunrise'},
+  {src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800',cat:'landscapes',label:'Starry Night — Spiti'},
+  {src:'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800',cat:'adventure',label:'River Rafting'},
+  {src:'https://images.unsplash.com/photo-1502786129293-79981df4e689?w=800',cat:'wildlife',label:'Himalayan Wildlife'},
+  {src:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800',cat:'landscapes',label:'Chandratal Lake'},
+  {src:'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800',cat:'wildlife',label:'Snow Leopard Territory'},
+  {src:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',cat:'culture',label:'Tibetan Culture'},
+  {src:'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800',cat:'culture',label:'Local Crafts'},
+  {src:'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=800',cat:'adventure',label:'Skiing — Solang Valley'},
+  {src:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800',cat:'wildlife',label:'Alpine Meadows'},
+];
+
+var currentCat = 'all';
+var filtered = photos;
+var currentIdx = 0;
+
+function renderGallery(list) {
+  var grid = document.getElementById('gallery-grid');
+  grid.innerHTML = list.map(function(p, i) {
+    return '<div class="gallery-item" data-idx="' + i + '" onclick="openLB(' + i + ')">' +
+      '<img src="' + p.src + '" alt="' + p.label + '" loading="lazy"/>' +
+      '<div class="gallery-item-overlay"></div>' +
+      '<div class="gallery-item-label">' + p.label + '</div>' +
+    '</div>';
+  }).join('');
+  // Staggered reveal
+  var items = grid.querySelectorAll('.gallery-item');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() { e.target.classList.add('visible'); }, (parseInt(e.target.dataset.idx) % 8) * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  items.forEach(function(el) { obs.observe(el); });
+}
+
+function filterGallery(cat) {
+  currentCat = cat;
+  filtered = cat === 'all' ? photos : photos.filter(function(p) { return p.cat === cat; });
+  renderGallery(filtered);
+  document.querySelectorAll('.filter-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+}
+
+function openLB(idx) {
+  currentIdx = idx;
+  document.getElementById('lb-img').src = filtered[idx].src;
+  document.getElementById('lb-caption').textContent = filtered[idx].label;
+  document.getElementById('lb-counter').textContent = (idx + 1) + ' / ' + filtered.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function changeLB(dir) {
+  currentIdx = (currentIdx + dir + filtered.length) % filtered.length;
+  var img = document.getElementById('lb-img');
+  img.style.opacity = '0';
+  setTimeout(function() {
+    img.src = filtered[currentIdx].src;
+    document.getElementById('lb-caption').textContent = filtered[currentIdx].label;
+    document.getElementById('lb-counter').textContent = (currentIdx + 1) + ' / ' + filtered.length;
+    img.style.opacity = '1';
+  }, 150);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') changeLB(1);
+  if (e.key === 'ArrowLeft')  changeLB(-1);
+  if (e.key === 'Escape')     closeLB();
+});
+
+// Close on backdrop click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLB();
+});
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { filterGallery(this.dataset.cat); });
+});
+
+// Init
+renderGallery(photos);
+</script>
+</body>
+</html>
