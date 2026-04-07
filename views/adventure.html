@@ -50,13 +50,7 @@
     .spinner { width:40px; height:40px; border:3px solid #eee; border-top-color:var(--orange); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 16px; }
     @keyframes spin { to { transform:rotate(360deg); } }
 
-    footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-    footer .footer-logo { color:#fff; font-family:'Playfair Display',serif; font-size:1.1rem; }
-    footer .footer-links { display:flex; gap:24px; }
-    footer .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; transition:color .2s; }
-    footer .footer-links a:hover { color:#fff; }
-    footer p { font-size:0.82rem; }
-      /* FOOTER */
+    /* FOOTER */
     footer { background:var(--navy); color:rgba(255,255,255,0.55); padding:56px 48px 32px; }
     .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px; max-width:1200px; margin:0 auto 40px; flex-wrap:wrap; }
     .footer-col h4 { color:#fff; font-family:"Playfair Display",serif; font-size:1rem; margin-bottom:16px; }
@@ -71,13 +65,18 @@
 
   <nav>
     <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/destinations">Destinations</a></li>
-      <li><a href="/adventure" class="active">Adventure</a></li>
-      <li><a href="/heritage">Heritage</a></li><li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
+    
+        param($m)
+        $m.Groups[1].Value + "`n    <li><a href="/" >Home</a></li>
+    <li><a href="/destinations" >Destinations</a></li>
+    <li><a href="/adventure" class="active">Adventure</a></li>
+    <li><a href="/heritage" >Heritage</a></li>
+    <li><a href="/hotels" >Hotels</a></li>
+    <li><a href="/packages" >Packages</a></li>
+    <li><a href="/gallery" >Gallery</a></li>
+    <li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;" >Book Trip</a></li>
+    <li><a href="/contact" >Contact</a></li>`n  " + $m.Groups[3].Value
+    
   </nav>
 
   <div class="page-hero">

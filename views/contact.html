@@ -54,13 +54,7 @@
     .success { background:#d1fae5; color:#065f46; border:1px solid #a7f3d0; }
     .error   { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
 
-    footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-    footer .footer-logo { color:#fff; font-family:'Playfair Display',serif; font-size:1.1rem; }
-    footer .footer-links { display:flex; gap:24px; }
-    footer .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; transition:color .2s; }
-    footer .footer-links a:hover { color:#fff; }
-    footer p { font-size:0.82rem; }
-      /* FOOTER */
+    /* FOOTER */
     footer { background:var(--navy); color:rgba(255,255,255,0.55); padding:56px 48px 32px; }
     .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px; max-width:1200px; margin:0 auto 40px; flex-wrap:wrap; }
     .footer-col h4 { color:#fff; font-family:"Playfair Display",serif; font-size:1rem; margin-bottom:16px; }
@@ -75,13 +69,18 @@
 
   <nav>
     <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/destinations">Destinations</a></li>
-      <li><a href="/adventure">Adventure</a></li>
-      <li><a href="/heritage">Heritage</a></li><li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
-      <li><a href="/contact" class="active">Contact</a></li>
-    </ul>
+    
+        param($m)
+        $m.Groups[1].Value + "`n    <li><a href="/" >Home</a></li>
+    <li><a href="/destinations" >Destinations</a></li>
+    <li><a href="/adventure" >Adventure</a></li>
+    <li><a href="/heritage" >Heritage</a></li>
+    <li><a href="/hotels" >Hotels</a></li>
+    <li><a href="/packages" >Packages</a></li>
+    <li><a href="/gallery" >Gallery</a></li>
+    <li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;" >Book Trip</a></li>
+    <li><a href="/contact" class="active">Contact</a></li>`n  " + $m.Groups[3].Value
+    
   </nav>
 
   <div class="page-hero">
@@ -207,7 +206,12 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+    // EmailJS — fill in your keys from emailjs.com to enable direct email sending
+    var EMAILJS_KEY     = 'YOUR_EMAILJS_PUBLIC_KEY';
+    var EMAILJS_SERVICE = 'YOUR_SERVICE_ID';
+    var EMAILJS_TEMPLATE= 'YOUR_TEMPLATE_ID';
+    var emailjsReady = EMAILJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY';
+    if (emailjsReady) emailjs.init(EMAILJS_KEY);
 
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -215,33 +219,45 @@
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
-      var params = {
-        from_name:    document.getElementById('name').value,
-        from_email:   document.getElementById('email').value,
-        interest:     document.getElementById('interest').value || 'General Enquiry',
-        message:      document.getElementById('message').value,
-        to_email:     'deepakchauhan628@gmail.com'
-      };
+      var name     = document.getElementById('name').value;
+      var email    = document.getElementById('email').value;
+      var interest = document.getElementById('interest').value || 'General Enquiry';
+      var message  = document.getElementById('message').value;
+      var msgEl    = document.getElementById('msg');
 
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
-        .then(function() {
-          var msgEl = document.getElementById('msg');
-          msgEl.style.display = 'block';
-          msgEl.className = 'success';
-          msgEl.textContent = 'Thank you, ' + params.from_name + '! Your message has been sent. We\'ll reply to ' + params.from_email + ' within 24 hours.';
-          e.target.reset();
-          btn.textContent = 'Message Sent ✓';
-        })
-        .catch(function(err) {
-          var msgEl = document.getElementById('msg');
-          msgEl.style.display = 'block';
-          msgEl.className = 'error';
-          msgEl.textContent = 'Failed to send. Please email us directly at deepakchauhan628@gmail.com';
-          btn.textContent = 'Send Message →';
-          btn.disabled = false;
-          console.error('EmailJS error:', err);
+      if (emailjsReady) {
+        emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+          from_name: name, from_email: email, interest: interest, message: message, to_email: 'deepakchauhan628@gmail.com'
+        }).then(function() {
+          msgEl.style.display = 'block'; msgEl.className = 'success';
+          msgEl.textContent = 'Thank you, ' + name + '! We\'ll reply to ' + email + ' within 24 hours.';
+          e.target.reset(); btn.textContent = 'Message Sent ✓';
+        }).catch(function() {
+          fallbackMailto(name, email, interest, message, btn, msgEl);
         });
+      } else {
+        // Fallback: send via backend + open mailto
+        fetch('/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:name,email:email,interest:interest,message:message}) })
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            msgEl.style.display = 'block'; msgEl.className = data.success ? 'success' : 'error';
+            msgEl.textContent = data.success ? 'Thank you, ' + name + '! We\'ll get back to you at ' + email + ' within 24 hours.' : data.message;
+            if (data.success) { e.target.reset(); btn.textContent = 'Message Sent ✓'; }
+            else { btn.textContent = 'Send Message →'; btn.disabled = false; }
+          }).catch(function(){
+            fallbackMailto(name, email, interest, message, btn, msgEl);
+          });
+      }
     });
+
+    function fallbackMailto(name, email, interest, message, btn, msgEl) {
+      var subject = encodeURIComponent('Enquiry from ' + name + ' — ' + interest);
+      var body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nInterest: ' + interest + '\n\nMessage:\n' + message);
+      window.location.href = 'mailto:deepakchauhan628@gmail.com?subject=' + subject + '&body=' + body;
+      msgEl.style.display = 'block'; msgEl.className = 'success';
+      msgEl.textContent = 'Opening your email app... If it doesn\'t open, email us at deepakchauhan628@gmail.com';
+      btn.textContent = 'Send Message →'; btn.disabled = false;
+    }
   </script>
   <script src="/chatbox.js"></script>
 </body>
