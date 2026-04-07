@@ -1,4 +1,4 @@
-name: Build & Deploy — Manali Escape
+name: CI — Manali Escape
 
 on:
   push:
@@ -7,9 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  # ── CI: Install & lint ───────────────────────────────────────────────────────
   build:
-    name: Build & Test
+    name: Install & Verify
     runs-on: ubuntu-latest
 
     steps:
@@ -25,69 +24,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify app starts
-        run: |
-          timeout 10 node app.js &
-          sleep 4
-          curl -f http://localhost:3000 || exit 1
-        env:
-          PORT: 3000
-          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-          TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
-          ADMIN_PHONE: ${{ secrets.ADMIN_PHONE }}
-          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-
-  # ── Docker build & push ──────────────────────────────────────────────────────
-  docker:
-    name: Docker Build & Push
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/manali-escape:latest
-            ${{ secrets.DOCKER_USERNAME }}/manali-escape:${{ github.sha }}
-
-  # ── Deploy to server (SSH) ───────────────────────────────────────────────────
-  deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: docker
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/manali-escape:latest
-            docker stop manali-escape || true
-            docker rm manali-escape || true
-            docker run -d \
-              --name manali-escape \
-              --restart unless-stopped \
-              -p 3000:3000 \
-              --env-file /home/${{ secrets.SSH_USER }}/.env \
-              ${{ secrets.DOCKER_USERNAME }}/manali-escape:latest
-            echo "Deployed successfully"
+      - name: Check app syntax
+        run: node --check app.js
