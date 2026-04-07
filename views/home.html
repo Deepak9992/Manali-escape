@@ -96,7 +96,30 @@
     .exp-card h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--navy); margin-bottom:8px; }
     .exp-card p { font-size:0.84rem; color:var(--muted); line-height:1.6; }
 
-    /* HIGHLIGHT STRIP */
+    /* ── ANIMATIONS ─────────────────────────────────────────────────────────── */
+    /* Scroll reveal base */
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.from-left { transform:translateX(-40px); }
+    .reveal.from-right { transform:translateX(40px); }
+    .reveal.scale-in { transform:scale(0.92); }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* Stagger delays */
+    .reveal.d1{transition-delay:.1s} .reveal.d2{transition-delay:.2s}
+    .reveal.d3{transition-delay:.3s} .reveal.d4{transition-delay:.4s}
+    .reveal.d5{transition-delay:.5s} .reveal.d6{transition-delay:.6s}
+
+    /* Hero entrance */
+    .hero-badge  { animation: fadeDown .8s ease both; }
+    .hero h1     { animation: fadeUp 1s ease .2s both; }
+    .hero p      { animation: fadeUp 1s ease .4s both; }
+    .hero-btns   { animation: fadeUp 1s ease .6s both; }
+    .hero-scroll { animation: fadeUp 1s ease .9s both; }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:none} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:none} }
+
+    /* Parallax hero bg */
+    .hero-bg { will-change: transform; }
     .highlight { background:linear-gradient(135deg, var(--navy) 0%, #1e4d7b 100%); padding:80px 48px; display:flex; align-items:center; gap:60px; max-width:none; }
     .highlight-text { flex:1; color:#fff; }
     .highlight-text h2 { font-family:'Playfair Display',serif; font-size:2.4rem; margin-bottom:16px; }
@@ -160,13 +183,13 @@
   <!-- DESTINATIONS -->
   <section style="padding:90px 48px; background:#fff;">
     <div style="max-width:1200px; margin:0 auto;">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="section-label">Where to Go</div>
         <h2 class="section-title">Top Destinations</h2>
         <p class="section-sub">From snow-capped Spiti to the lush Parvati Valley — every corner of Himachal tells a story.</p>
       </div>
       <div class="dest-grid">
-        <a class="dest-card large" href="/destinations" style="text-decoration:none;">
+        <a class="dest-card large reveal d1" href="/destinations" style="text-decoration:none;">
           <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=900" alt="Manali"/>
           <div class="dest-card-overlay"></div>
           <div class="dest-card-body">
@@ -176,7 +199,7 @@
             <span class="dest-card-link">Explore →</span>
           </div>
         </a>
-        <a class="dest-card" href="/destinations" style="text-decoration:none;">
+        <a class="dest-card reveal d2" href="/destinations" style="text-decoration:none;">
           <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=600" alt="Shimla"/>
           <div class="dest-card-overlay"></div>
           <div class="dest-card-body">
@@ -186,7 +209,7 @@
             <span class="dest-card-link">Explore →</span>
           </div>
         </a>
-        <a class="dest-card" href="/destinations" style="text-decoration:none;">
+        <a class="dest-card reveal d3" href="/destinations" style="text-decoration:none;">
           <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" alt="Spiti"/>
           <div class="dest-card-overlay"></div>
           <div class="dest-card-body">
@@ -196,7 +219,7 @@
             <span class="dest-card-link">Explore →</span>
           </div>
         </a>
-        <a class="dest-card" href="/destinations" style="text-decoration:none;">
+        <a class="dest-card reveal d4" href="/destinations" style="text-decoration:none;">
           <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600" alt="Dharamshala"/>
           <div class="dest-card-overlay"></div>
           <div class="dest-card-body">
@@ -206,7 +229,7 @@
             <span class="dest-card-link">Explore →</span>
           </div>
         </a>
-        <a class="dest-card large" href="/destinations" style="text-decoration:none;">
+        <a class="dest-card large reveal d5" href="/destinations" style="text-decoration:none;">
           <img src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=900" alt="Kasol"/>
           <div class="dest-card-overlay"></div>
           <div class="dest-card-body">
@@ -223,41 +246,29 @@
   <!-- EXPERIENCES -->
   <section class="exp-section">
     <div style="max-width:1200px; margin:0 auto;">
-      <div class="section-header" style="text-align:center;">
+      <div class="section-header reveal" style="text-align:center;">
         <div class="section-label">What to Do</div>
         <h2 class="section-title">Experiences</h2>
         <p class="section-sub" style="margin:0 auto;">Every kind of traveller finds their calling in Himachal Pradesh.</p>
       </div>
       <div class="exp-grid">
-        <a class="exp-card" href="/adventure">
-          <div class="exp-icon">🧗</div>
-          <h3>Trekking</h3>
-          <p>From Triund to Hampta Pass — trails for every level.</p>
+        <a class="exp-card reveal d1" href="/adventure">
+          <div class="exp-icon">🧗</div><h3>Trekking</h3><p>From Triund to Hampta Pass — trails for every level.</p>
         </a>
-        <a class="exp-card" href="/adventure">
-          <div class="exp-icon">🪂</div>
-          <h3>Paragliding</h3>
-          <p>Bir Billing — the paragliding capital of India.</p>
+        <a class="exp-card reveal d2" href="/adventure">
+          <div class="exp-icon">🪂</div><h3>Paragliding</h3><p>Bir Billing — the paragliding capital of India.</p>
         </a>
-        <a class="exp-card" href="/adventure">
-          <div class="exp-icon">⛷️</div>
-          <h3>Skiing</h3>
-          <p>Solang Valley and Kufri for winter snow sports.</p>
+        <a class="exp-card reveal d3" href="/adventure">
+          <div class="exp-icon">⛷️</div><h3>Skiing</h3><p>Solang Valley and Kufri for winter snow sports.</p>
         </a>
-        <a class="exp-card" href="/heritage">
-          <div class="exp-icon">🛕</div>
-          <h3>Temples</h3>
-          <p>500+ temples and monasteries across the state.</p>
+        <a class="exp-card reveal d4" href="/heritage">
+          <div class="exp-icon">🛕</div><h3>Temples</h3><p>500+ temples and monasteries across the state.</p>
         </a>
-        <a class="exp-card" href="/cuisine">
-          <div class="exp-icon">🍜</div>
-          <h3>Cuisine</h3>
-          <p>Sidu, Momos, Kali Dal and Himalayan flavours.</p>
+        <a class="exp-card reveal d5" href="/cuisine">
+          <div class="exp-icon">🍜</div><h3>Cuisine</h3><p>Sidu, Momos, Kali Dal and Himalayan flavours.</p>
         </a>
-        <a class="exp-card" href="/festivals">
-          <div class="exp-icon">🎉</div>
-          <h3>Festivals</h3>
-          <p>Kullu Dussehra, Losar, Minjar and more.</p>
+        <a class="exp-card reveal d6" href="/festivals">
+          <div class="exp-icon">🎉</div><h3>Festivals</h3><p>Kullu Dussehra, Losar, Minjar and more.</p>
         </a>
       </div>
     </div>
@@ -265,13 +276,13 @@
 
   <!-- HIGHLIGHT -->
   <div class="highlight">
-    <div class="highlight-text">
+    <div class="highlight-text reveal from-left">
       <div class="section-label" style="color:rgba(255,255,255,0.5);">Spiritual Trail</div>
       <h2>500+ Temples & Monasteries</h2>
       <p>Himachal Pradesh is home to the Jakhu Temple, Namgyal Monastery — the Dalai Lama's residence — Key Monastery at 4,166m, and the sacred Manikaran Gurudwara beside the Parvati River.</p>
       <a href="/heritage" class="btn-primary">Explore Heritage</a>
     </div>
-    <div class="highlight-img">
+    <div class="highlight-img reveal from-right">
       <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800" alt="Monastery"/>
     </div>
   </div>
@@ -305,8 +316,9 @@
           <p>📍 Ward No. 4, Village Siyal</p>
           <p>Post Office Manali, PIN 175131</p>
           <p>Himachal Pradesh, India</p>
-          <p style="margin-top:10px;">📞 <a href="tel:+919805549992">+91 98055 49992</a></p>
-          <p>🌐 <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p>
+          <p style="margin-top:10px;">📞  <a href="tel:+919805549992">+91 98055 49992</a></p>
+          <p>🌐  <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p>
+          
         </address>
       </div>
     </div>
@@ -316,5 +328,43 @@
   </footer>
 
   <script src="/chatbox.js"></script>
-</body>
+  <script>
+    // ── Scroll reveal ──────────────────────────────────────────────────────────
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    // ── Parallax hero bg ───────────────────────────────────────────────────────
+    var heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', function() {
+      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.35) + 'px)';
+    }, { passive: true });
+
+    // ── Counter animation ──────────────────────────────────────────────────────
+    var statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.num').forEach(function(el) {
+          var target = el.textContent;
+          var num = parseFloat(target.replace(/[^0-9.]/g, ''));
+          var suffix = target.replace(/[0-9.]/g, '');
+          var start = 0; var duration = 1800;
+          var step = function(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = (num < 10 ? (ease * num).toFixed(0) : Math.floor(ease * num)) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+        statsObserver.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    var statsEl = document.querySelector('.stats');
+    if (statsEl) statsObserver.observe(statsEl);
+  </script>
 </html>
