@@ -69,7 +69,6 @@
       <li><a href="/adventure">Adventure</a></li>
       <li><a href="/heritage">Heritage</a></li>
       <li><a href="/cuisine">Cuisine</a></li>
-      <li><a href="/festivals">Festivals</a></li>
       <li><a href="/taxi">Taxi</a></li><li><a href="/booking" class="active">Book Trip</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
@@ -184,8 +183,39 @@
     </div>
   </div>
 
+  <!-- Taxi Contact Section -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px 60px;">
+    <div style="background:#fff;border-radius:18px;padding:36px;box-shadow:0 2px 20px rgba(0,0,0,0.08);">
+      <div style="font-size:0.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#e67e22;margin-bottom:8px;">Local Transport</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#0f2744;margin-bottom:28px;">Book a Taxi for Your Trip</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div style="border:1.5px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;gap:16px;align-items:center;">
+          <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#0f2744,#1a3c5e);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;">🧑</div>
+          <div style="flex:1;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#0f2744;margin-bottom:2px;">Rahul</div>
+            <div style="font-size:0.85rem;color:#6b7280;margin-bottom:12px;">📞 +91 82788 40575</div>
+            <div style="display:flex;gap:8px;">
+              <a href="tel:+918278840575" style="padding:8px 18px;background:#0f2744;color:#fff;border-radius:7px;font-size:0.82rem;font-weight:600;text-decoration:none;">📞 Call</a>
+              <a href="https://wa.me/918278840575?text=Hi+Rahul%2C+I+need+a+taxi+for+my+Manali+trip" target="_blank" style="padding:8px 18px;background:#25d366;color:#fff;border-radius:7px;font-size:0.82rem;font-weight:600;text-decoration:none;">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+        <div style="border:1.5px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;gap:16px;align-items:center;">
+          <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#0f2744,#1a3c5e);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;">👨</div>
+          <div style="flex:1;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#0f2744;margin-bottom:2px;">Harsh</div>
+            <div style="font-size:0.85rem;color:#6b7280;margin-bottom:12px;">📞 +91 98051 30497</div>
+            <div style="display:flex;gap:8px;">
+              <a href="tel:+919805130497" style="padding:8px 18px;background:#0f2744;color:#fff;border-radius:7px;font-size:0.82rem;font-weight:600;text-decoration:none;">📞 Call</a>
+              <a href="https://wa.me/919805130497?text=Hi+Harsh%2C+I+need+a+taxi+for+my+Manali+trip" target="_blank" style="padding:8px 18px;background:#25d366;color:#fff;border-radius:7px;font-size:0.82rem;font-weight:600;text-decoration:none;">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="/chatbox.js"></script>
-  <script>
     // Sync destination selects
     document.getElementById('dest-select').addEventListener('change', function() {
       document.getElementById('cost-dest').value = this.value;
