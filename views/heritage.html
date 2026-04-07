@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heritage – Manali Escape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --navy:#0f2744; --orange:#e67e22; --light:#f5f7fa; --muted:#6b7280; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; color:#2c3e50; }
+    nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(15,39,68,0.95); backdrop-filter:blur(10px); padding:0 48px; height:90px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .logo { text-decoration:none; display:flex; align-items:center; gap:8px; }
+    nav ul { list-style:none; display:flex; gap:6px; }
+    nav ul a { color:rgba(255,255,255,0.75); text-decoration:none; font-size:0.88rem; font-weight:500; padding:8px 14px; border-radius:6px; transition:all .2s; }
+    nav ul a:hover, nav ul a.active { color:#fff; background:rgba(255,255,255,0.1); }
+
+    .page-hero { height:55vh; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .page-hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600') center/cover; }
+    .page-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(15,39,68,0.7), rgba(15,39,68,0.45)); }
+    .page-hero-content { position:relative; z-index:2; text-align:center; color:#fff; }
+    .badge { display:inline-block; background:rgba(230,126,34,0.9); color:#fff; padding:5px 16px; border-radius:20px; font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+    .page-hero-content h1 { font-family:'Playfair Display',serif; font-size:3.2rem; margin-bottom:12px; }
+    .page-hero-content p { font-size:1rem; color:rgba(255,255,255,0.8); }
+
+    .container { max-width:1100px; margin:0 auto; padding:70px 48px; }
+    .section-label { font-size:0.78rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:10px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--navy); margin-bottom:12px; }
+    .section-sub { font-size:0.95rem; color:var(--muted); line-height:1.7; margin-bottom:36px; }
+
+    .heritage-block { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-bottom:80px; }
+    .heritage-block.reverse { direction:rtl; }
+    .heritage-block.reverse > * { direction:ltr; }
+    .heritage-img { border-radius:16px; overflow:hidden; height:320px; }
+    .heritage-img img { width:100%; height:100%; object-fit:cover; }
+    .heritage-text {}
+    .items-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px; }
+    .item { background:var(--light); border-radius:10px; padding:16px; border-left:3px solid var(--orange); }
+    .item h4 { color:var(--navy); font-size:0.92rem; margin-bottom:4px; }
+    .item p { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+
+    .culture-strip { background:var(--navy); border-radius:20px; padding:50px; margin-bottom:60px; }
+    .culture-strip h2 { font-family:'Playfair Display',serif; font-size:2rem; color:#fff; margin-bottom:8px; }
+    .culture-strip .sub { color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:32px; line-height:1.7; }
+    .culture-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; }
+    .culture-item { background:rgba(255,255,255,0.07); border-radius:12px; padding:20px; text-align:center; }
+    .culture-item .ico { font-size:1.8rem; margin-bottom:10px; }
+    .culture-item h4 { color:#fff; font-size:0.9rem; margin-bottom:4px; }
+    .culture-item p { color:rgba(255,255,255,0.55); font-size:0.78rem; }
+
+    footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    footer .footer-logo { color:#fff; font-family:'Playfair Display',serif; font-size:1.1rem; }
+    footer .footer-links { display:flex; gap:24px; }
+    footer .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; transition:color .2s; }
+    footer .footer-links a:hover { color:#fff; }
+    footer p { font-size:0.82rem; }
+      /* FOOTER */
+    footer { background:var(--navy); color:rgba(255,255,255,0.55); padding:56px 48px 32px; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px; max-width:1200px; margin:0 auto 40px; flex-wrap:wrap; }
+    .footer-col h4 { color:#fff; font-family:"Playfair Display",serif; font-size:1rem; margin-bottom:16px; }
+    .footer-col p, .footer-col a { color:rgba(255,255,255,0.55); font-size:0.84rem; line-height:1.8; text-decoration:none; display:block; transition:color .2s; }
+    .footer-col a:hover { color:#e67e22; }
+    .footer-col .footer-logo-img { height:60px; width:auto; mix-blend-mode:lighten; margin-bottom:12px; }
+    .footer-address { font-style:normal; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); max-width:1200px; margin:0 auto; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li><a href="/adventure">Adventure</a></li>
+      <li><a href="/heritage" class="active">Heritage</a></li>
+      <li><a href="/cuisine">Cuisine</a></li>
+      <li><a href="/festivals">Festivals</a></li>
+      <li><a href="/taxi">Taxi</a></li><li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="badge">Culture & History</div>
+      <h1>Heritage &amp; Spirituality</h1>
+      <p>Ancient forts, sacred temples, and living monasteries</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- MONUMENTS -->
+    <div class="heritage-block">
+      <div class="heritage-img">
+        <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?w=800" alt="Kangra Fort"/>
+      </div>
+      <div class="heritage-text">
+        <div class="section-label">Historical Monuments</div>
+        <h2 class="section-title">Ancient Forts &amp; Castles</h2>
+        <p class="section-sub">Himachal's landscape is dotted with medieval forts and castles that carry centuries of history. Naggar Castle was built in 1460 AD using a fusion of Himalayan and Western architectural styles. The Kangra Fort, established by the Katoch dynasty, is mentioned in the Mahabharata.</p>
+        <div class="items-grid">
+          <div class="item"><h4>Naggar Castle</h4><p>Built 1460 AD, Himalayan-Western fusion architecture overlooking Kullu Valley.</p></div>
+          <div class="item"><h4>Kuthar Fort</h4><p>800-year-old fort surrounded by freshwater springs in Solan district.</p></div>
+          <div class="item"><h4>Kangra Fort</h4><p>Katoch dynasty fort, one of the oldest in the Himalayas, mentioned in Mahabharata.</p></div>
+          <div class="item"><h4>Hadimba Temple</h4><p>Prehistoric cave temple in Manali's cedar forest, built in 1553 AD.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPIRITUAL -->
+    <div class="heritage-block reverse">
+      <div class="heritage-img">
+        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800" alt="Monastery"/>
+      </div>
+      <div class="heritage-text">
+        <div class="section-label">Spiritual Trail</div>
+        <h2 class="section-title">500+ Temples &amp; Monasteries</h2>
+        <p class="section-sub">From the Jakhu Temple atop Shimla's hills to the Key Monastery perched at 4,166m in Spiti, Himachal's spiritual landscape is unmatched. The Namgyal Monastery in McLeod Ganj serves as the personal monastery of the Dalai Lama.</p>
+        <div class="items-grid">
+          <div class="item"><h4>Jakhu Temple</h4><p>Atop Jakhu Hill, Shimla — linked to Lord Hanuman's legendary journey.</p></div>
+          <div class="item"><h4>Namgyal Monastery</h4><p>McLeod Ganj — the Dalai Lama's personal monastery.</p></div>
+          <div class="item"><h4>Key Monastery</h4><p>Spiti Valley at 4,166m — Tibetan Buddhist heritage site.</p></div>
+          <div class="item"><h4>Manikaran Gurudwara</h4><p>Sacred to Sikhs and Hindus, famous for natural hot springs.</p></div>
+          <div class="item"><h4>Palpung Sherabling</h4><p>Bir — sanctuary for Buddhist studies and cultural immersion.</p></div>
+          <div class="item"><h4>Hatu Mata Temple</h4><p>Atop Hatu Peak, Narkanda — panoramic Himalayan views.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CULTURE -->
+    <div class="culture-strip">
+      <h2>Art, Music &amp; Dance</h2>
+      <p class="sub">The enchanting landscapes inspire local artisans, musicians, and dancers. Himachali folk music has featured in Bollywood. Dance forms like Nati, Kinnaur, and Dangi reflect the unique spirit of this land.</p>
+      <div class="culture-grid">
+        <div class="culture-item"><div class="ico">💃</div><h4>Nati Dance</h4><p>Traditional group dance at festivals</p></div>
+        <div class="culture-item"><div class="ico">🎵</div><h4>Ainchaliyan</h4><p>Pre-wedding folk songs</p></div>
+        <div class="culture-item"><div class="ico">🥁</div><h4>Karak</h4><p>Drums & cymbals, spiritual devotion</p></div>
+        <div class="culture-item"><div class="ico">🎨</div><h4>Pahari Paintings</h4><p>Kangra & Basohli miniature art</p></div>
+        <div class="culture-item"><div class="ico">🧵</div><h4>Kullu Shawls</h4><p>Hand-woven woollen shawls</p></div>
+        <div class="culture-item"><div class="ico">🪘</div><h4>Jhoori</h4><p>Romantic folk songs of the valleys</p></div>
+      </div>
+    </div>
+
+  </div>
+
+    <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="/images/logo.png" alt="Manali Escape" class="footer-logo-img"/>
+        <p>Your gateway to the breathtaking landscapes, ancient temples, and vibrant culture of Himachal Pradesh.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="/">Home</a>
+        <a href="/destinations">Destinations</a>
+        <a href="/adventure">Adventure</a>
+        <a href="/heritage">Heritage</a>
+        <a href="/cuisine">Cuisine</a>
+        <a href="/festivals">Festivals</a>
+        <a href="/taxi">Taxi</a>
+        <a href="/booking">Book Trip</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="/destinations">Manali</a>
+        <a href="/destinations">Shimla</a>
+        <a href="/destinations">Spiti Valley</a>
+        <a href="/destinations">Dharamshala</a>
+        <a href="/destinations">Kasol</a>
+        <a href="/destinations">Bir Billing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tourism Office</h4>
+        <address class="footer-address">
+          <p>📍 Ward No. 4, Village Siyal</p>
+          <p>Post Office Manali, PIN 175131</p>
+          <p>Himachal Pradesh, India</p>
+          <p style="margin-top:10px;">📞 <a href="tel:+919805549992">+91 98055 49992</a></p>
+          <p>🌐 <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Manali Escape. All rights reserved. &nbsp;|&nbsp; Inspired by <a href="https://www.incredibleindia.gov.in" style="color:rgba(255,255,255,0.4)">Incredible India</a>
+    </div>
+  </footer>
+
+  <script src="/chatbox.js"></script>
+</body>
+</html>

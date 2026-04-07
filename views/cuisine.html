@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuisine – Manali Escape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --navy:#0f2744; --orange:#e67e22; --light:#f5f7fa; --muted:#6b7280; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; color:#2c3e50; }
+    nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(15,39,68,0.95); backdrop-filter:blur(10px); padding:0 48px; height:90px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .logo { text-decoration:none; display:flex; align-items:center; gap:8px; }
+    nav ul { list-style:none; display:flex; gap:6px; }
+    nav ul a { color:rgba(255,255,255,0.75); text-decoration:none; font-size:0.88rem; font-weight:500; padding:8px 14px; border-radius:6px; transition:all .2s; }
+    nav ul a:hover, nav ul a.active { color:#fff; background:rgba(255,255,255,0.1); }
+
+    .page-hero { height:55vh; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .page-hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1567337710282-00832b415979?w=1600') center/cover; }
+    .page-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(15,39,68,0.7), rgba(15,39,68,0.45)); }
+    .page-hero-content { position:relative; z-index:2; text-align:center; color:#fff; }
+    .badge { display:inline-block; background:rgba(230,126,34,0.9); color:#fff; padding:5px 16px; border-radius:20px; font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+    .page-hero-content h1 { font-family:'Playfair Display',serif; font-size:3.2rem; margin-bottom:12px; }
+    .page-hero-content p { font-size:1rem; color:rgba(255,255,255,0.8); }
+
+    .container { max-width:1100px; margin:0 auto; padding:70px 48px; }
+    .section-label { font-size:0.78rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:10px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--navy); margin-bottom:12px; }
+    .intro { font-size:0.95rem; color:var(--muted); line-height:1.8; margin-bottom:50px; max-width:700px; }
+
+    .cuisine-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:22px; }
+    .dish-card { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,0.07); transition:all .3s; }
+    .dish-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.12); }
+    .dish-top { height:8px; background:linear-gradient(90deg, var(--orange), #f39c12); }
+    .dish-body { padding:24px; }
+    .dish-type { font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:8px; }
+    .dish-body h3 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--navy); margin-bottom:10px; }
+    .dish-body p { font-size:0.87rem; color:var(--muted); line-height:1.65; }
+    .dish-icon { font-size:1.8rem; float:right; margin-top:-4px; }
+
+    .influence-bar { background:var(--navy); border-radius:20px; padding:50px; margin-top:60px; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+    .influence-bar h2 { font-family:'Playfair Display',serif; font-size:2rem; color:#fff; margin-bottom:12px; }
+    .influence-bar p { color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.8; }
+    .influence-tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+    .inf-tag { background:rgba(255,255,255,0.1); color:#fff; padding:6px 16px; border-radius:20px; font-size:0.82rem; }
+    .influence-img { border-radius:14px; overflow:hidden; height:260px; }
+    .influence-img img { width:100%; height:100%; object-fit:cover; }
+
+    footer { background:var(--navy); color:rgba(255,255,255,0.5); padding:40px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:0; }
+    footer .footer-logo { color:#fff; font-family:'Playfair Display',serif; font-size:1.1rem; }
+    footer .footer-links { display:flex; gap:24px; }
+    footer .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; transition:color .2s; }
+    footer .footer-links a:hover { color:#fff; }
+    footer p { font-size:0.82rem; }
+      /* FOOTER */
+    footer { background:var(--navy); color:rgba(255,255,255,0.55); padding:56px 48px 32px; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px; max-width:1200px; margin:0 auto 40px; flex-wrap:wrap; }
+    .footer-col h4 { color:#fff; font-family:"Playfair Display",serif; font-size:1rem; margin-bottom:16px; }
+    .footer-col p, .footer-col a { color:rgba(255,255,255,0.55); font-size:0.84rem; line-height:1.8; text-decoration:none; display:block; transition:color .2s; }
+    .footer-col a:hover { color:#e67e22; }
+    .footer-col .footer-logo-img { height:60px; width:auto; mix-blend-mode:lighten; margin-bottom:12px; }
+    .footer-address { font-style:normal; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); max-width:1200px; margin:0 auto; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li><a href="/adventure">Adventure</a></li>
+      <li><a href="/heritage">Heritage</a></li>
+      <li><a href="/cuisine" class="active">Cuisine</a></li>
+      <li><a href="/festivals">Festivals</a></li>
+      <li><a href="/taxi">Taxi</a></li><li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="badge">Food & Flavours</div>
+      <h1>The Himalayan Feast</h1>
+      <p>A delightful fusion of Punjabi and Tibetan influences</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-label">Must-Try Dishes</div>
+    <h2 class="section-title">Himachali Cuisine</h2>
+    <p class="intro">Drawing inspiration from both Punjabi and Tibetan influences, the cuisine of Himachal Pradesh offers a delightful fusion. A typical meal includes dals, rice, hearty broths, flatbreads, and vegetable dishes, each infused with local aromatic spices and mountain herbs.</p>
+
+    <div class="cuisine-grid">
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🫓</span>
+          <div class="dish-type">Bread</div>
+          <h3>Sidu</h3>
+          <p>A wheat-based steamed bread stuffed with poppy seeds or walnuts — a staple of Himachali households, especially in Kullu.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🥞</span>
+          <div class="dish-type">Breakfast</div>
+          <h3>Patande</h3>
+          <p>A unique local version of pancakes made from wheat flour, popular in the Kullu region as a morning staple.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🫘</span>
+          <div class="dish-type">Dal</div>
+          <h3>Kali Dal</h3>
+          <p>Black lentils slow-cooked with local spices — a hearty, nutritious staple dish found in every Himachali home.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🥔</span>
+          <div class="dish-type">Curry</div>
+          <h3>Aloo Palda</h3>
+          <p>Potatoes cooked in a yoghurt-based gravy with local spices — a comfort food classic across the state.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🎃</span>
+          <div class="dish-type">Vegetable</div>
+          <h3>Auriya Kadoo</h3>
+          <p>A delectable pumpkin preparation cooked with mustard seeds and local herbs — a seasonal favourite.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🥟</span>
+          <div class="dish-type">Snack</div>
+          <h3>Momos</h3>
+          <p>Tibetan-influenced steamed dumplings filled with vegetables or meat, ubiquitous across Himachal Pradesh.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🌿</span>
+          <div class="dish-type">Condiment</div>
+          <h3>Chutney of Til</h3>
+          <p>A sesame seed chutney with a nutty, tangy flavour — served as a condiment with most traditional meals.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🍲</span>
+          <div class="dish-type">Curry</div>
+          <h3>Khatta</h3>
+          <p>A tangy tamarind-based curry, often made with potatoes or bottle gourd — a signature Himachali flavour.</p>
+        </div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-top"></div>
+        <div class="dish-body">
+          <span class="dish-icon">🌸</span>
+          <div class="dish-type">Delicacy</div>
+          <h3>Spicy Lotus Stems</h3>
+          <p>Lotus stems cooked in a spiced gravy — a unique and flavourful Himachali delicacy found in the Kangra region.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="influence-bar">
+      <div>
+        <h2>Culinary Influences</h2>
+        <p>Himachali cuisine sits at the crossroads of Punjabi heartiness and Tibetan simplicity, shaped by altitude, climate, and centuries of cultural exchange along ancient trade routes.</p>
+        <div class="influence-tags">
+          <span class="inf-tag">🌶 Mountain Spices</span>
+          <span class="inf-tag">🧈 Ghee & Dairy</span>
+          <span class="inf-tag">🍚 Rice & Lentils</span>
+          <span class="inf-tag">🥩 Red Meat Gravies</span>
+          <span class="inf-tag">🍜 Tibetan Noodles</span>
+        </div>
+      </div>
+      <div class="influence-img">
+        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=700" alt="Himachali food"/>
+      </div>
+    </div>
+  </div>
+
+    <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="/images/logo.png" alt="Manali Escape" class="footer-logo-img"/>
+        <p>Your gateway to the breathtaking landscapes, ancient temples, and vibrant culture of Himachal Pradesh.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="/">Home</a>
+        <a href="/destinations">Destinations</a>
+        <a href="/adventure">Adventure</a>
+        <a href="/heritage">Heritage</a>
+        <a href="/cuisine">Cuisine</a>
+        <a href="/festivals">Festivals</a>
+        <a href="/taxi">Taxi</a>
+        <a href="/booking">Book Trip</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="/destinations">Manali</a>
+        <a href="/destinations">Shimla</a>
+        <a href="/destinations">Spiti Valley</a>
+        <a href="/destinations">Dharamshala</a>
+        <a href="/destinations">Kasol</a>
+        <a href="/destinations">Bir Billing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tourism Office</h4>
+        <address class="footer-address">
+          <p>📍 Ward No. 4, Village Siyal</p>
+          <p>Post Office Manali, PIN 175131</p>
+          <p>Himachal Pradesh, India</p>
+          <p style="margin-top:10px;">📞 <a href="tel:+919805549992">+91 98055 49992</a></p>
+          <p>🌐 <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Manali Escape. All rights reserved. &nbsp;|&nbsp; Inspired by <a href="https://www.incredibleindia.gov.in" style="color:rgba(255,255,255,0.4)">Incredible India</a>
+    </div>
+  </footer>
+
+  <script src="/chatbox.js"></script>
+</body>
+</html>

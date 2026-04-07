@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taxi Directory – Manali Escape</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0f2744;--orange:#e67e22;--light:#f5f7fa;--muted:#6b7280;--green:#10b981;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;color:#2c3e50;background:var(--light);}
+    nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(15,39,68,0.97);backdrop-filter:blur(10px);padding:0 40px;height:90px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .logo{color:#fff;font-family:'Playfair Display',serif;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:10px;}
+    nav ul{list-style:none;display:flex;gap:4px;flex-wrap:wrap;}
+    nav ul a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.85rem;font-weight:500;padding:7px 12px;border-radius:6px;transition:all .2s;}
+    nav ul a:hover,nav ul a.active{color:#fff;background:rgba(255,255,255,0.1);}
+    .hero{height:44vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:68px;}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600') center/cover;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,39,68,0.75),rgba(15,39,68,0.5));}
+    .hero-content{position:relative;z-index:2;text-align:center;color:#fff;}
+    .badge{display:inline-block;background:rgba(230,126,34,0.9);color:#fff;padding:5px 16px;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+    .hero-content h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:10px;}
+    .hero-content p{font-size:1rem;color:rgba(255,255,255,0.8);}
+    .container{max-width:1200px;margin:0 auto;padding:50px 40px;}
+    .top-bar{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:40px;background:#fff;padding:24px 28px;border-radius:16px;box-shadow:0 2px 14px rgba(0,0,0,0.07);}
+    .top-bar label{font-size:0.78rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
+    .top-bar select,.top-bar input{padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;font-family:inherit;color:#2c3e50;outline:none;transition:border-color .2s;background:#fff;}
+    .top-bar select:focus,.top-bar input:focus{border-color:var(--orange);}
+    .top-bar .field{flex:1;min-width:160px;}
+    .btn{padding:11px 24px;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .btn-orange{background:var(--orange);color:#fff;align-self:flex-end;}
+    .btn-orange:hover{background:#cf6d17;transform:translateY(-1px);}
+    .btn-green{background:var(--green);color:#fff;}
+    .btn-green:hover{background:#059669;}
+    .layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;}
+    .taxi-grid{display:grid;gap:18px;}
+    .taxi-card{background:#fff;border-radius:14px;padding:22px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.07);display:flex;gap:18px;align-items:flex-start;transition:all .3s;}
+    .taxi-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.12);}
+    .taxi-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+    .icon-union{background:#eef2ff;}
+    .icon-private{background:#fef3c7;}
+    .icon-govt{background:#d1fae5;}
+    .taxi-info{flex:1;}
+    .taxi-info h3{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:4px;}
+    .taxi-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+    .type-badge{font-size:0.7rem;font-weight:600;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+    .type-union{background:#eef2ff;color:#4f46e5;}
+    .type-private{background:#fef3c7;color:#92400e;}
+    .type-govt{background:#d1fae5;color:#065f46;}
+    .stars{color:#f59e0b;font-size:0.82rem;}
+    .taxi-note{font-size:0.83rem;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+    .taxi-actions{display:flex;gap:8px;flex-wrap:wrap;}
+    .btn-call{padding:7px 16px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:background .2s;}
+    .btn-call:hover{background:#1a3c5e;}
+    .btn-whatsapp{padding:7px 16px;background:#25d366;color:#fff;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+    .btn-osm{padding:7px 16px;background:#7c3aed;color:#fff;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+    /* Fare estimator card */
+    .fare-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,0.08);position:sticky;top:88px;}
+    .fare-card h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin-bottom:6px;}
+    .fare-card .sub{font-size:0.82rem;color:var(--muted);margin-bottom:22px;}
+    .fare-card label{font-size:0.75rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;}
+    .fare-card input,.fare-card select{width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.88rem;font-family:inherit;outline:none;margin-bottom:14px;transition:border-color .2s;}
+    .fare-card input:focus,.fare-card select:focus{border-color:var(--orange);}
+    .fare-result{background:var(--light);border-radius:10px;padding:16px;margin-top:16px;display:none;}
+    .fare-row{display:flex;justify-content:space-between;font-size:0.85rem;padding:5px 0;border-bottom:1px solid #e5e7eb;}
+    .fare-row:last-child{border:none;font-weight:700;font-size:0.95rem;color:var(--navy);padding-top:10px;}
+    .fare-row span:last-child{color:var(--orange);}
+    /* OSM map strip */
+    .osm-strip{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.08);margin-top:28px;}
+    .osm-strip-header{padding:16px 22px;display:flex;justify-content:space-between;align-items:center;}
+    .osm-strip-header h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);}
+    #osm-frame{width:100%;height:320px;border:none;display:block;}
+    .empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+    .empty-state .ico{font-size:3rem;margin-bottom:12px;}
+    .spinner{width:36px;height:36px;border:3px solid #eee;border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    
+      /* FOOTER */
+    footer { background:var(--navy); color:rgba(255,255,255,0.55); padding:56px 48px 32px; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px; max-width:1200px; margin:0 auto 40px; flex-wrap:wrap; }
+    .footer-col h4 { color:#fff; font-family:"Playfair Display",serif; font-size:1rem; margin-bottom:16px; }
+    .footer-col p, .footer-col a { color:rgba(255,255,255,0.55); font-size:0.84rem; line-height:1.8; text-decoration:none; display:block; transition:color .2s; }
+    .footer-col a:hover { color:#e67e22; }
+    .footer-col .footer-logo-img { height:60px; width:auto; mix-blend-mode:lighten; margin-bottom:12px; }
+    .footer-address { font-style:normal; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); max-width:1200px; margin:0 auto; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;letter-spacing:0.5px;">Manali Escape</span></a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/destinations">Destinations</a></li>
+    <li><a href="/adventure">Adventure</a></li>
+    <li><a href="/heritage">Heritage</a></li>
+    <li><a href="/cuisine">Cuisine</a></li>
+    <li><a href="/festivals">Festivals</a></li>
+    <li><a href="/taxi" class="active">Taxi</a></li>
+    <li><a href="/booking" style="background:#e67e22;color:#fff;border-radius:6px;">Book Trip</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="badge">Local Transport</div>
+    <h1>Taxi Directory</h1>
+    <p>Find verified taxi services, get fare estimates, and navigate with OpenStreetMap</p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Search bar -->
+  <div class="top-bar">
+    <div class="field">
+      <label>Select Destination</label>
+      <select id="dest-select" onchange="loadTaxis()">
+        <option value="">-- Choose destination --</option>
+        <option value="Manali">Manali</option>
+        <option value="Shimla">Shimla</option>
+        <option value="Spiti Valley">Spiti Valley</option>
+        <option value="Dharamshala">Dharamshala</option>
+        <option value="Kasol">Kasol</option>
+        <option value="Bir Billing">Bir Billing</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Filter by Type</label>
+      <select id="type-filter" onchange="applyFilter()">
+        <option value="all">All Types</option>
+        <option value="Union">Union</option>
+        <option value="Private">Private</option>
+        <option value="Govt">Government</option>
+      </select>
+    </div>
+    <button class="btn btn-orange" onclick="loadTaxis()">🔍 Search Taxis</button>
+  </div>
+
+  <div class="layout">
+    <!-- Taxi list -->
+    <div>
+      <div id="taxi-list">
+        <div class="empty-state">
+          <div class="ico">🚕</div>
+          <p>Select a destination above to see available taxi services</p>
+        </div>
+      </div>
+
+      <!-- OSM Map -->
+      <div class="osm-strip" id="osm-strip" style="display:none;">
+        <div class="osm-strip-header">
+          <h3 id="osm-title">📍 Destination Map</h3>
+          <a id="osm-link" href="#" target="_blank" class="btn btn-green" style="font-size:0.8rem;padding:7px 16px;">Open in OSM ↗</a>
+        </div>
+        <iframe id="osm-frame" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Fare estimator -->
+    <div class="fare-card">
+      <h2>🧮 Fare Estimator</h2>
+      <p class="sub">Estimate your taxi cost based on distance and vehicle type</p>
+
+      <label>Vehicle Type</label>
+      <select id="vehicle-type">
+        <option value="Hatchback">Hatchback (₹12/km)</option>
+        <option value="Sedan" selected>Sedan (₹14/km)</option>
+        <option value="SUV">SUV (₹18/km)</option>
+        <option value="Tempo Traveller">Tempo Traveller (₹22/km)</option>
+      </select>
+
+      <label>Distance (km)</label>
+      <input type="number" id="fare-km" value="30" min="1" max="500" placeholder="e.g. 30"/>
+
+      <label>Number of Passengers</label>
+      <input type="number" id="fare-pax" value="2" min="1" max="12"/>
+
+      <label>Waiting Hours (optional)</label>
+      <input type="number" id="fare-wait" value="0" min="0" max="12" step="0.5"/>
+
+      <button class="btn btn-orange" style="width:100%" onclick="calcFare()">Calculate Fare →</button>
+
+      <div class="fare-result" id="fare-result">
+        <div class="fare-row"><span>Base charge</span><span id="fr-base"></span></div>
+        <div class="fare-row"><span>Distance charge</span><span id="fr-dist"></span></div>
+        <div class="fare-row"><span>Waiting charge</span><span id="fr-wait"></span></div>
+        <div class="fare-row"><span>Estimated Total</span><span id="fr-total"></span></div>
+        <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);">* Rates are approximate. Confirm with driver before travel.</div>
+      </div>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid #f0f0f0;">
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Find Taxis via OpenStreetMap</p>
+        <a id="osm-taxi-link" href="https://www.openstreetmap.org/search?query=taxi+Manali+Himachal+Pradesh" target="_blank"
+           class="btn btn-green" style="width:100%;display:block;text-align:center;text-decoration:none;padding:10px;">
+          🗺 Search on OSM
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="/images/logo.png" alt="Manali Escape" class="footer-logo-img"/>
+        <p>Your gateway to the breathtaking landscapes, ancient temples, and vibrant culture of Himachal Pradesh.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="/">Home</a>
+        <a href="/destinations">Destinations</a>
+        <a href="/adventure">Adventure</a>
+        <a href="/heritage">Heritage</a>
+        <a href="/cuisine">Cuisine</a>
+        <a href="/festivals">Festivals</a>
+        <a href="/taxi">Taxi</a>
+        <a href="/booking">Book Trip</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="/destinations">Manali</a>
+        <a href="/destinations">Shimla</a>
+        <a href="/destinations">Spiti Valley</a>
+        <a href="/destinations">Dharamshala</a>
+        <a href="/destinations">Kasol</a>
+        <a href="/destinations">Bir Billing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tourism Office</h4>
+        <address class="footer-address">
+          <p>📍 Ward No. 4, Village Siyal</p>
+          <p>Post Office Manali, PIN 175131</p>
+          <p>Himachal Pradesh, India</p>
+          <p style="margin-top:10px;">📞 <a href="tel:+919805549992">+91 98055 49992</a></p>
+          <p>🌐 <a href="http://manaliescape.in" target="_blank">manaliescape.in</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Manali Escape. All rights reserved. &nbsp;|&nbsp; Inspired by <a href="https://www.incredibleindia.gov.in" style="color:rgba(255,255,255,0.4)">Incredible India</a>
+    </div>
+  </footer>
+
+<script src="/chatbox.js"></script>
+<script>
+  var allTaxis = [];
+  var fareRates = {};
+
+  // OSM coordinates per destination
+  var OSM_COORDS = {
+    'Manali':       { lat: 32.2396, lon: 77.1887, zoom: 13 },
+    'Shimla':       { lat: 31.1048, lon: 77.1734, zoom: 13 },
+    'Spiti Valley': { lat: 32.2461, lon: 78.0338, zoom: 11 },
+    'Dharamshala':  { lat: 32.2190, lon: 76.3234, zoom: 13 },
+    'Kasol':        { lat: 32.0099, lon: 77.3150, zoom: 14 },
+    'Bir Billing':  { lat: 32.0395, lon: 76.7197, zoom: 13 }
+  };
+
+  function loadTaxis() {
+    var dest = document.getElementById('dest-select').value;
+    if (!dest) return;
+
+    document.getElementById('taxi-list').innerHTML = '<div class="spinner"></div>';
+
+    fetch('/api/taxis?destination=' + encodeURIComponent(dest))
+      .then(function(r){ return r.json(); })
+      .then(function(json){
+        allTaxis  = json.data || [];
+        fareRates = json.fareRates || {};
+        renderTaxis(allTaxis);
+        showOSMMap(dest);
+        // Update OSM taxi search link
+        document.getElementById('osm-taxi-link').href =
+          'https://www.openstreetmap.org/search?query=taxi+' + encodeURIComponent(dest) + '+Himachal+Pradesh';
+      });
+  }
+
+  function applyFilter() {
+    var type = document.getElementById('type-filter').value;
+    var filtered = type === 'all' ? allTaxis : allTaxis.filter(function(t){ return t.type === type; });
+    renderTaxis(filtered);
+  }
+
+  function renderTaxis(list) {
+    if (!list.length) {
+      document.getElementById('taxi-list').innerHTML =
+        '<div class="empty-state"><div class="ico">🚕</div><p>No taxi services found for this filter.</p></div>';
+      return;
+    }
+    var iconMap = { Union:'🚖', Private:'🚗', Govt:'🏛' };
+    var classMap = { Union:'icon-union', Private:'icon-private', Govt:'icon-govt' };
+    var badgeMap = { Union:'type-union', Private:'type-private', Govt:'type-govt' };
+
+    document.getElementById('taxi-list').innerHTML = list.map(function(t){
+      var stars = '';
+      for(var i=0;i<5;i++) stars += i < Math.round(t.rating) ? '★' : '☆';
+      var phone = t.phone.replace(/\s/g,'');
+      var waNum  = phone.replace(/[^0-9]/g,'');
+      return '<div class="taxi-card">' +
+        '<div class="taxi-icon ' + (classMap[t.type]||'icon-private') + '">' + (iconMap[t.type]||'🚕') + '</div>' +
+        '<div class="taxi-info">' +
+          '<h3>' + t.name + '</h3>' +
+          '<div class="taxi-meta">' +
+            '<span class="type-badge ' + (badgeMap[t.type]||'type-private') + '">' + t.type + '</span>' +
+            '<span class="stars">' + stars + ' ' + t.rating + '</span>' +
+          '</div>' +
+          '<p class="taxi-note">' + t.note + '</p>' +
+          '<div class="taxi-actions">' +
+            '<a class="btn-call" href="tel:' + phone + '">📞 Call</a>' +
+            '<a class="btn-whatsapp" href="https://wa.me/' + waNum + '?text=Hi%2C+I+need+a+taxi+in+Himachal+Pradesh" target="_blank">💬 WhatsApp</a>' +
+            '<a class="btn-osm" href="https://www.openstreetmap.org/search?query=taxi+near+' + encodeURIComponent(t.name) + '" target="_blank">🗺 Find on Map</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function showOSMMap(dest) {
+    var c = OSM_COORDS[dest];
+    if (!c) return;
+    var strip = document.getElementById('osm-strip');
+    strip.style.display = 'block';
+    document.getElementById('osm-title').textContent = '📍 ' + dest + ' — OpenStreetMap';
+    // Free OSM embed — no API key needed
+    var src = 'https://www.openstreetmap.org/export/embed.html?bbox=' +
+      (c.lon - 0.05) + '%2C' + (c.lat - 0.04) + '%2C' +
+      (c.lon + 0.05) + '%2C' + (c.lat + 0.04) +
+      '&layer=mapnik&marker=' + c.lat + '%2C' + c.lon;
+    document.getElementById('osm-frame').src = src;
+    document.getElementById('osm-link').href =
+      'https://www.openstreetmap.org/?mlat=' + c.lat + '&mlon=' + c.lon + '#map=' + c.zoom + '/' + c.lat + '/' + c.lon;
+  }
+
+  function calcFare() {
+    var vehicle = document.getElementById('vehicle-type').value;
+    var km      = parseFloat(document.getElementById('fare-km').value) || 0;
+    var wait    = parseFloat(document.getElementById('fare-wait').value) || 0;
+    var rates   = fareRates[vehicle] || { perKm: 14, base: 120 };
+
+    var base     = rates.base;
+    var distCost = km * rates.perKm;
+    var waitCost = wait * 100; // ₹100/hr waiting
+    var total    = base + distCost + waitCost;
+
+    var fmt = function(n){ return '₹' + n.toLocaleString('en-IN'); };
+    document.getElementById('fr-base').textContent  = fmt(base);
+    document.getElementById('fr-dist').textContent  = fmt(distCost) + ' (' + km + ' km × ₹' + rates.perKm + ')';
+    document.getElementById('fr-wait').textContent  = fmt(waitCost) + ' (' + wait + ' hr)';
+    document.getElementById('fr-total').textContent = fmt(total);
+    document.getElementById('fare-result').style.display = 'block';
+  }
+
+  // Pre-select destination from URL param
+  var params = new URLSearchParams(window.location.search);
+  var preselect = params.get('dest');
+  if (preselect) {
+    document.getElementById('dest-select').value = preselect;
+    loadTaxis();
+  }
+</script>
+</body>
+</html>
