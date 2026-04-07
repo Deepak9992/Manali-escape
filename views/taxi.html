@@ -49,6 +49,10 @@
     .type-govt{background:#d1fae5;color:#065f46;}
     .stars{color:#f59e0b;font-size:0.82rem;}
     .taxi-note{font-size:0.83rem;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+    .driver-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+    .driver-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;width:52px;flex-shrink:0;}
+    .driver-name{font-size:0.88rem;font-weight:700;color:var(--navy);}
+    .driver-phone{font-size:0.85rem;color:#374151;}
     .taxi-actions{display:flex;gap:8px;flex-wrap:wrap;}
     .btn-call{padding:7px 16px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:background .2s;}
     .btn-call:hover{background:#1a3c5e;}
@@ -298,8 +302,12 @@
     document.getElementById('taxi-list').innerHTML = list.map(function(t){
       var stars = '';
       for(var i=0;i<5;i++) stars += i < Math.round(t.rating) ? '★' : '☆';
-      var phone = t.phone.replace(/\s/g,'');
-      var waNum  = phone.replace(/[^0-9]/g,'');
+      var phone = t.phone.replace(/[\s\-]/g,'');
+      var waNum = phone.replace(/[^0-9]/g,'');
+      var driverRow = t.driver
+        ? '<div class="driver-row"><span class="driver-label">👤 Driver</span><span class="driver-name">' + t.driver + '</span></div>'
+        : '';
+      var phoneRow = '<div class="driver-row"><span class="driver-label">📞 Phone</span><span class="driver-phone">' + t.phone + '</span></div>';
       return '<div class="taxi-card">' +
         '<div class="taxi-icon ' + (classMap[t.type]||'icon-private') + '">' + (iconMap[t.type]||'🚕') + '</div>' +
         '<div class="taxi-info">' +
@@ -308,11 +316,12 @@
             '<span class="type-badge ' + (badgeMap[t.type]||'type-private') + '">' + t.type + '</span>' +
             '<span class="stars">' + stars + ' ' + t.rating + '</span>' +
           '</div>' +
+          driverRow + phoneRow +
           '<p class="taxi-note">' + t.note + '</p>' +
           '<div class="taxi-actions">' +
             '<a class="btn-call" href="tel:' + phone + '">📞 Call</a>' +
             '<a class="btn-whatsapp" href="https://wa.me/' + waNum + '?text=Hi%2C+I+need+a+taxi+in+Himachal+Pradesh" target="_blank">💬 WhatsApp</a>' +
-            '<a class="btn-osm" href="https://www.openstreetmap.org/search?query=taxi+near+' + encodeURIComponent(t.name) + '" target="_blank">🗺 Find on Map</a>' +
+            '<a class="btn-osm" href="https://www.openstreetmap.org/search?query=taxi+near+' + encodeURIComponent(t.name) + '" target="_blank">🗺 Map</a>' +
           '</div>' +
         '</div>' +
       '</div>';

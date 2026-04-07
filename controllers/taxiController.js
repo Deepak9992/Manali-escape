@@ -7,10 +7,10 @@ const index = (req, res) => {
 // Static taxi directory per destination (curated + OSM-backed)
 const taxiDirectory = {
   Manali: [
-    { name: 'Manali Taxi Union',        phone: '+91-1902-252323', type: 'Union',   rating: 4.5, note: 'Official govt-registered union. Fixed rates.' },
-    { name: 'Rohtang Taxi Operators',   phone: '+91-9816012345',  type: 'Private', rating: 4.3, note: 'Specialises in Rohtang Pass & Solang Valley.' },
-    { name: 'Kullu-Manali Cab Service', phone: '+91-9805112233',  type: 'Private', rating: 4.2, note: 'Airport transfers and outstation trips.' },
-    { name: 'Himalayan Cabs',           phone: '+91-9816098765',  type: 'Private', rating: 4.4, note: 'AC cabs, Innova & Tempo Traveller available.' },
+    { name: 'Manali Taxi Union',        driver: null,    phone: '+91-1902-252323', type: 'Union',   rating: 4.5, note: 'Official govt-registered union. Fixed rates.' },
+    { name: 'Rohtang Taxi Operators',   driver: 'Rahul', phone: '+918278840575',   type: 'Private', rating: 4.8, note: 'Specialises in Rohtang Pass & Solang Valley.' },
+    { name: 'Kullu-Manali Cab Service', driver: 'Harsh', phone: '+919805130497',   type: 'Private', rating: 4.7, note: 'Airport transfers and outstation trips.' },
+    { name: 'Himalayan Cabs',           driver: null,    phone: '+91-9816098765',  type: 'Private', rating: 4.4, note: 'AC cabs, Innova & Tempo Traveller available.' },
   ],
   Shimla: [
     { name: 'Shimla Taxi Stand',        phone: '+91-177-2652345', type: 'Union',   rating: 4.4, note: 'Main taxi stand near Cart Road.' },
