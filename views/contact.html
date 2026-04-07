@@ -205,30 +205,42 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.btn-submit');
+      var btn = e.target.querySelector('.btn-submit');
       btn.textContent = 'Sending...';
       btn.disabled = true;
-      const body = {
-        name:     document.getElementById('name').value,
-        email:    document.getElementById('email').value,
-        interest: document.getElementById('interest').value,
-        message:  document.getElementById('message').value
+
+      var params = {
+        from_name:    document.getElementById('name').value,
+        from_email:   document.getElementById('email').value,
+        interest:     document.getElementById('interest').value || 'General Enquiry',
+        message:      document.getElementById('message').value,
+        to_email:     'deepakchauhan628@gmail.com'
       };
-      try {
-        const res  = await fetch('/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
-        const data = await res.json();
-        const msgEl = document.getElementById('msg');
-        msgEl.style.display = 'block';
-        msgEl.className = data.success ? 'success' : 'error';
-        msgEl.textContent = data.message;
-        if (data.success) { e.target.reset(); btn.textContent = 'Message Sent ✓'; }
-        else { btn.textContent = 'Send Message →'; btn.disabled = false; }
-      } catch {
-        btn.textContent = 'Send Message →'; btn.disabled = false;
-      }
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params)
+        .then(function() {
+          var msgEl = document.getElementById('msg');
+          msgEl.style.display = 'block';
+          msgEl.className = 'success';
+          msgEl.textContent = 'Thank you, ' + params.from_name + '! Your message has been sent. We\'ll reply to ' + params.from_email + ' within 24 hours.';
+          e.target.reset();
+          btn.textContent = 'Message Sent ✓';
+        })
+        .catch(function(err) {
+          var msgEl = document.getElementById('msg');
+          msgEl.style.display = 'block';
+          msgEl.className = 'error';
+          msgEl.textContent = 'Failed to send. Please email us directly at deepakchauhan628@gmail.com';
+          btn.textContent = 'Send Message →';
+          btn.disabled = false;
+          console.error('EmailJS error:', err);
+        });
     });
   </script>
   <script src="/chatbox.js"></script>

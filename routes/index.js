@@ -10,6 +10,8 @@ const contactController      = require('../controllers/contactController');
 const bookingController      = require('../controllers/bookingController');
 const costController         = require('../controllers/costController');
 const chatController         = require('../controllers/chatController');
+const hotelController        = require('../controllers/hotelController');
+const packagesController     = require('../controllers/packagesController');
 
 // Pages
 router.get('/',             homeController.index);
@@ -19,11 +21,17 @@ router.get('/heritage',     heritageController.index);
 router.get('/festivals',    festivalsController.index);
 router.get('/contact',      contactController.index);
 router.get('/booking',      bookingController.index);
+router.get('/hotels',       hotelController.index);
+router.get('/packages',     packagesController.index);
 
 // Data APIs
-router.get('/api/destinations', destinationsController.getAll);
-router.get('/api/adventure',    adventureController.getAll);
-router.get('/api/festivals',    festivalsController.getAll);
+router.get('/api/destinations',  destinationsController.getAll);
+router.get('/api/adventure',     adventureController.getAll);
+router.get('/api/festivals',     festivalsController.getAll);
+router.get('/api/hotels',        hotelController.getAll);
+router.post('/api/hotels/book',  hotelController.book);
+router.get('/api/packages',      packagesController.getAll);
+router.post('/api/packages/book',packagesController.book);
 
 // Booking APIs
 router.post('/api/book',          bookingController.create);
