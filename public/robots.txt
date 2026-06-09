@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://manaliescape.in/sitemap.xml
+Sitemap: https://manaliescape.com/sitemap.xml

@@ -1,4 +1,4 @@
-# Manali Escape 🏔
+﻿# Manali Escape 🏔
 
 A full-stack tourism website for Himachal Pradesh built with Node.js and Express.
 
@@ -71,4 +71,4 @@ See `.github/workflows/deploy.yml` for CI/CD pipeline.
 
 ---
 
-© 2026 Manali Escape | [manaliescape.in](http://manaliescape.in)
+© 2026 Manali Escape | [manaliescape.com](http://manaliescape.com)
