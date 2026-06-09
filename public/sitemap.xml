@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://manaliescape.com/</loc>
-  </url>
+  <url><loc>https://manaliescape.in/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/destinations</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/adventure</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/heritage</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/hotels</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/packages</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://manaliescape.in/gallery</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://manaliescape.in/booking</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://manaliescape.in/contact</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
 </urlset>
