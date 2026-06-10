@@ -1,0 +1,122 @@
+/* ── Manali Escape — Global Responsive Styles ──────────────────────────────── */
+
+/* Hamburger button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1100;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all .3s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  /* Show hamburger, hide nav links */
+  .nav-toggle { display: flex; }
+
+  nav ul {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    right: 0;
+    background: rgba(15,39,68,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    gap: 0;
+    padding: 16px 0 24px;
+    display: none;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  nav ul.open { display: flex; }
+  nav ul li { width: 100%; }
+  nav ul a {
+    display: block;
+    padding: 14px 32px;
+    font-size: 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  nav { padding: 0 20px; height: 70px; }
+  nav ul { top: 70px; }
+
+  /* Hero */
+  .hero h1, .hero-content h1 { font-size: 2.4rem !important; }
+  .hero p { font-size: 1rem !important; }
+  .hero-btns { flex-direction: column; align-items: center; }
+
+  /* Stats */
+  .stats { gap: 28px; padding: 28px 20px; }
+  .stat .num { font-size: 1.8rem; }
+
+  /* Section padding */
+  section, .container { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Destination grid */
+  .dest-grid { grid-template-columns: 1fr !important; }
+  .dest-card.large { grid-column: span 1 !important; }
+
+  /* Experience grid */
+  .exp-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Highlight strip */
+  .highlight { flex-direction: column !important; padding: 40px 20px !important; gap: 28px !important; }
+  .highlight-img { height: 240px !important; width: 100%; }
+
+  /* Main grid (booking) */
+  .main-grid { grid-template-columns: 1fr !important; padding: 24px 16px !important; }
+
+  /* Contact layout */
+  .contact-layout { grid-template-columns: 1fr !important; padding: 40px 20px !important; gap: 32px !important; }
+
+  /* Hotel/package grid */
+  .hotel-grid, .pkg-grid { grid-template-columns: 1fr !important; }
+
+  /* Footer grid */
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+
+  /* Gallery masonry */
+  .gallery-grid { columns: 2 !important; }
+
+  /* Driver grid */
+  .driver-grid .driver-card { flex-direction: column; text-align: center; }
+  .driver-card .driver-avatar { margin: 0 auto; }
+  .driver-card .driver-actions { justify-content: center; }
+
+  /* Form rows */
+  .row2, .form-row { grid-template-columns: 1fr !important; gap: 0 !important; }
+
+  /* Page hero */
+  .page-hero { margin-top: 70px; }
+  .page-hero-content h1 { font-size: 2.2rem !important; }
+
+  /* Taxi section in booking */
+  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+  /* Logo text size */
+  .logo span { font-size: 1rem !important; }
+  .logo img { height: 56px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero h1, .hero-content h1 { font-size: 1.9rem !important; }
+  .section-title { font-size: 1.8rem !important; }
+  .exp-grid { grid-template-columns: 1fr !important; }
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .gallery-grid { columns: 1 !important; }
+  .stats { flex-direction: column; gap: 20px; }
+  footer { padding: 40px 20px 24px !important; }
+}
