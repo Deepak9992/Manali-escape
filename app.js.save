@@ -28,7 +28,9 @@ app.get('/ads.txt', (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   res.sendFile(path.join(__dirname, 'public', 'ads.txt'));
 });
-
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'blog.html'));
+});
 
 app.get('/blog/solang-valley', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'solang-valley.html'));
@@ -37,7 +39,6 @@ app.get('/blog/solang-valley', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/articles/rohtang-pass-2026.html'));
 
 });
-
 // Routes
 app.use('/', routes);
 
