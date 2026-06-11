@@ -1,4 +1,5 @@
 const express = require('express');
+const path    = require('path');
 const router  = express.Router();
 
 const homeController         = require('../controllers/homeController');
@@ -47,5 +48,18 @@ router.post('/contact', contactController.submit);
 
 // AI Chat
 router.post('/api/chat', chatController.chat);
+
+// Dynamic blog route — serves views/blogs/<slug>.html automatically
+router.get('/blog', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/blogs/index.html'));
+});
+
+router.get('/blog/:slug', (req, res) => {
+  const slug = req.params.slug.replace(/[^a-zA-Z0-9-_]/g, ''); // sanitize
+  const filePath = path.join(__dirname, '../views/blogs', `${slug}.html`);
+  res.sendFile(filePath, (err) => {
+    if (err) res.status(404).send('<h1>Blog post not found</h1><a href="/blog">← Back to Blog</a>');
+  });
+});
 
 module.exports = router;
