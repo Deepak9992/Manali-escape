@@ -49,11 +49,13 @@ router.post('/contact', contactController.submit);
 // AI Chat
 router.post('/api/chat', chatController.chat);
 
-// Dynamic blog route — serves views/blogs/<slug>.html automatically
+// ── Blog (dynamic) ────────────────────────────────────────────────────────────
+// Blog index
 router.get('/blog', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/blogs/index.html'));
 });
 
+// Individual blog post — just add views/blogs/<slug>.html and it works automatically
 router.get('/blog/:slug', (req, res) => {
   const slug = req.params.slug.replace(/[^a-zA-Z0-9-_]/g, ''); // sanitize
   const filePath = path.join(__dirname, '../views/blogs', `${slug}.html`);
