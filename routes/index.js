@@ -15,36 +15,34 @@ const hotelController        = require('../controllers/hotelController');
 const packagesController     = require('../controllers/packagesController');
 const galleryController      = require('../controllers/galleryController');
 
-// Static pages
-const path = require('path');
 const staticPage = (file) => (req, res) => res.sendFile(path.join(__dirname, '../views', file));
 
 // Pages
-router.get('/',             homeController.index);
-router.get('/destinations', destinationsController.index);
-router.get('/adventure',    adventureController.index);
-router.get('/heritage',     heritageController.index);
-router.get('/festivals',    festivalsController.index);
-router.get('/contact',      contactController.index);
-router.get('/booking',      bookingController.index);
-router.get('/hotels',       hotelController.index);
-router.get('/packages',     packagesController.index);
-router.get('/gallery',      galleryController.index);
-router.get('/about',         staticPage('about.html'));
+router.get('/',               homeController.index);
+router.get('/destinations',   destinationsController.index);
+router.get('/adventure',      adventureController.index);
+router.get('/heritage',       heritageController.index);
+router.get('/festivals',      festivalsController.index);
+router.get('/contact',        contactController.index);
+router.get('/booking',        bookingController.index);
+router.get('/hotels',         hotelController.index);
+router.get('/packages',       packagesController.index);
+router.get('/gallery',        galleryController.index);
+router.get('/about',          staticPage('about.html'));
 router.get('/privacy-policy', staticPage('privacy-policy.html'));
 
 // Data APIs
-router.get('/api/destinations',  destinationsController.getAll);
-router.get('/api/adventure',     adventureController.getAll);
-router.get('/api/festivals',     festivalsController.getAll);
-router.get('/api/hotels',        hotelController.getAll);
-router.post('/api/hotels/book',  hotelController.book);
-router.get('/api/packages',      packagesController.getAll);
-router.post('/api/packages/book',packagesController.book);
+router.get('/api/destinations',   destinationsController.getAll);
+router.get('/api/adventure',      adventureController.getAll);
+router.get('/api/festivals',      festivalsController.getAll);
+router.get('/api/hotels',         hotelController.getAll);
+router.post('/api/hotels/book',   hotelController.book);
+router.get('/api/packages',       packagesController.getAll);
+router.post('/api/packages/book', packagesController.book);
 
 // Booking APIs
-router.post('/api/book',          bookingController.create);
-router.get('/api/bookings',       bookingController.getAll);
+router.post('/api/book',     bookingController.create);
+router.get('/api/bookings',  bookingController.getAll);
 
 // Cost estimate API
 router.post('/api/cost-estimate', costController.estimate);
@@ -55,15 +53,13 @@ router.post('/contact', contactController.submit);
 // AI Chat
 router.post('/api/chat', chatController.chat);
 
-// ── Blog (dynamic) ────────────────────────────────────────────────────────────
-// Blog index
+// ── Blog (dynamic) ─────────────────────────────────────────────────────────────
 router.get('/blog', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/blogs/index.html'));
 });
 
-// Individual blog post — just add views/blogs/<slug>.html and it works automatically
 router.get('/blog/:slug', (req, res) => {
-  const slug = req.params.slug.replace(/[^a-zA-Z0-9-_]/g, ''); // sanitize
+  const slug = req.params.slug.replace(/[^a-zA-Z0-9-_]/g, '');
   const filePath = path.join(__dirname, '../views/blogs', `${slug}.html`);
   res.sendFile(filePath, (err) => {
     if (err) res.status(404).send('<h1>Blog post not found</h1><a href="/blog">← Back to Blog</a>');
