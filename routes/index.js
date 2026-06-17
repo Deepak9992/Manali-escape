@@ -15,6 +15,10 @@ const hotelController        = require('../controllers/hotelController');
 const packagesController     = require('../controllers/packagesController');
 const galleryController      = require('../controllers/galleryController');
 
+// Static pages
+const path = require('path');
+const staticPage = (file) => (req, res) => res.sendFile(path.join(__dirname, '../views', file));
+
 // Pages
 router.get('/',             homeController.index);
 router.get('/destinations', destinationsController.index);
@@ -26,6 +30,8 @@ router.get('/booking',      bookingController.index);
 router.get('/hotels',       hotelController.index);
 router.get('/packages',     packagesController.index);
 router.get('/gallery',      galleryController.index);
+router.get('/about',         staticPage('about.html'));
+router.get('/privacy-policy', staticPage('privacy-policy.html'));
 
 // Data APIs
 router.get('/api/destinations',  destinationsController.getAll);
