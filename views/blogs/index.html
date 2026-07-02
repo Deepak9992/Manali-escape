@@ -163,73 +163,13 @@
     <ins class="adsbygoogle" style="display:block;min-height:90px;" data-ad-client="ca-pub-9341453132646393" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
   </div>
 
-  <!-- Blog Grid -->
+  <!-- Blog Grid — populated dynamically from /api/blogs -->
   <div class="blog-grid" id="blog-grid">
-
-    <a class="blog-card" href="/blog/rohtang-pass-guide" data-cat="guide">
-      <div class="bc-img">
-        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80" alt="Rohtang Pass snow-covered mountain pass Manali" loading="lazy"/>
-        <span class="bc-cat cat-guide">Pass Guide</span>
-      </div>
-      <div class="bc-body">
-        <div class="bc-meta"><span>📅 April 2026</span><span class="bc-meta-dot"></span><span>⏱ 7 min</span></div>
-        <h3>Complete Rohtang Pass Guide — Permits, Timing & What to Expect</h3>
-        <p>Everything about the legendary Rohtang Pass — online permits, best months, snow activities and common mistakes to avoid.</p>
-        <div class="bc-footer">
-          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
-          <span class="bc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="blog-card" href="/blog/chandratal-lake-guide" data-cat="nature">
-      <div class="bc-img">
-        <img src="/images/chandratal-1.jpeg" alt="Chandratal Lake turquoise waters Spiti Valley Himachal Pradesh" loading="lazy"/>
-        <span class="bc-cat cat-lakes">Lake Guide</span>
-      </div>
-      <div class="bc-body">
-        <div class="bc-meta"><span>📅 May 2026</span><span class="bc-meta-dot"></span><span>⏱ 9 min</span></div>
-        <h3>Chandratal Lake — The Moon Lake of Spiti Valley</h3>
-        <p>Turquoise waters, star-lit skies and a dramatic journey through one of India's most remote high-altitude landscapes.</p>
-        <div class="bc-footer">
-          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
-          <span class="bc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="blog-card" href="/blog/manali_waterfalls" data-cat="nature">
-      <div class="bc-img">
-        <img src="/images/Jogini Waterfall.jpg" alt="Jogini Waterfall cascading through cedar forest near Manali" loading="lazy"/>
-        <span class="bc-cat cat-nature">Waterfalls</span>
-      </div>
-      <div class="bc-body">
-        <div class="bc-meta"><span>📅 April 2026</span><span class="bc-meta-dot"></span><span>⏱ 6 min</span></div>
-        <h3>Best Waterfalls Near Manali — Hidden Gems of Kullu Valley</h3>
-        <p>Jogini, Rahala, Jana and Sajla — a complete guide to the most beautiful waterfalls near Manali.</p>
-        <div class="bc-footer">
-          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
-          <span class="bc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="blog-card" href="/blog/manali-traffic-june-2026" data-cat="update">
-      <div class="bc-img">
-        <img src="https://images.unsplash.com/photo-1566408669374-5a6d5dca1ef5?w=600&q=80" alt="Manali road traffic during peak tourist season June 2026" loading="lazy"/>
-        <span class="bc-cat cat-update">Traffic Update</span>
-      </div>
-      <div class="bc-body">
-        <div class="bc-meta"><span>📅 June 2026</span><span class="bc-meta-dot"></span><span>⏱ 5 min</span></div>
-        <h3>Manali Traffic Update June 2026 — Roads, Atal Tunnel & Tips</h3>
-        <p>Real-time road conditions, Atal Tunnel timings, Rohtang permit rules and tips to avoid peak-season traffic jams.</p>
-        <div class="bc-footer">
-          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
-          <span class="bc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
+    <!-- Loading state -->
+    <div id="blog-loading" style="grid-column:1/-1;text-align:center;padding:48px;color:#6b7280;">
+      <div style="font-size:2rem;margin-bottom:12px;">⏳</div>
+      <p>Loading latest articles...</p>
+    </div>
   </div><!-- /blog-grid -->
 
 </div><!-- /blog-container -->
@@ -287,14 +227,76 @@
   if(t&&m){t.addEventListener('click',function(){t.classList.toggle('open');m.classList.toggle('open');});}
 })();
 
-// Category filter
+// Category colour map
+var catColors = {
+  'Travel Guide':'#e8622a',
+  'Pass Guide':'#3b82f6',
+  'Lakes':'#8b5cf6',
+  'Nature':'#10b981',
+  'Traffic Update':'#f59e0b',
+  'Waterfalls':'#10b981',
+  'Adventure':'#3b82f6'
+};
+
+// Render one blog card
+function renderCard(b) {
+  var color = catColors[b.category] || '#e8622a';
+  var dateStr = b.date ? new Date(b.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+  return '<a class="blog-card" href="/blog/'+b.slug+'" data-cat="'+b.category+'">'
+    +'<div class="bc-img">'
+    +'<img src="'+b.image+'" alt="'+b.title+'" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=60\'"/>'
+    +'<span class="bc-cat" style="background:'+color+'">'+b.category+'</span>'
+    +'</div>'
+    +'<div class="bc-body">'
+    +'<div class="bc-meta"><span>📅 '+dateStr+'</span><span class="bc-meta-dot"></span><span>⏱ '+b.readTime+'</span></div>'
+    +'<h3>'+b.title+'</h3>'
+    +'<p>'+b.excerpt+'</p>'
+    +'<div class="bc-footer">'
+    +'<div class="bc-author"><div class="bc-avatar">🧑</div><span>'+b.author+'</span></div>'
+    +'<span class="bc-arrow">→</span>'
+    +'</div>'
+    +'</div>'
+    +'</a>';
+}
+
+// Fetch and render all blogs from API
+(function loadBlogs(){
+  var grid = document.getElementById('blog-grid');
+  fetch('/api/blogs')
+    .then(function(r){ return r.json(); })
+    .then(function(json){
+      if (!json.data || !json.data.length) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:40px;">No blog posts found.</p>';
+        return;
+      }
+      // Skip first (featured) — it's shown in the featured card above
+      var cards = json.data.slice(1);
+      grid.innerHTML = cards.map(renderCard).join('');
+
+      // Animate cards in
+      grid.querySelectorAll('.blog-card').forEach(function(card, i){
+        card.style.opacity='0';
+        card.style.transform='translateY(24px)';
+        setTimeout(function(){
+          card.style.transition='opacity .4s ease,transform .4s ease';
+          card.style.opacity='1';
+          card.style.transform='none';
+        }, i * 80);
+      });
+    })
+    .catch(function(){
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:40px;">Failed to load blogs. <a href="/blog" style="color:#e8622a;">Refresh</a></p>';
+    });
+})();
+
+// Category filter (works on dynamically loaded cards)
 document.querySelectorAll('.cat-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');
-    var cat=btn.getAttribute('data-cat');
+    var cat = btn.getAttribute('data-cat');
     document.querySelectorAll('.blog-card,.featured-card').forEach(function(card){
-      card.style.display=(cat==='all'||card.getAttribute('data-cat')===cat)?'':'none';
+      card.style.display = (cat==='all' || card.getAttribute('data-cat')===cat) ? '' : 'none';
     });
   });
 });
