@@ -1,194 +1,306 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8"/>
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>Blog – Manali Escape</title>
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9341453132646393" crossorigin="anonymous"></script>
- <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
- <link rel="preconnect" href="https://images.unsplash.com" crossorigin/>
- <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com"/>
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap&display=swap" rel="stylesheet"/>
- <link rel="stylesheet" href="/responsive.css"/>
- <style>
- :root{--navy:#0f2744;--orange:#e67e22;--light:#f5f7fa;--muted:#6b7280;}
- *{margin:0;padding:0;box-sizing:border-box;}
- body{font-family:'Inter',sans-serif;color:#2c3e50;background:var(--light);}
- nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(15,39,68,0.97);backdrop-filter:blur(10px);padding:0 40px;height:90px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);}
- .logo{text-decoration:none;display:flex;align-items:center;gap:8px;}
- nav ul{list-style:none;display:flex;gap:4px;flex-wrap:wrap;}
- nav ul a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.85rem;font-weight:500;padding:7px 12px;border-radius:6px;transition:all .2s;}
- nav ul a:hover,nav ul a.active{color:#fff;background:rgba(255,255,255,0.1);}
- .hero{height:38vh;position:relative;display:flex;align-items:center;justify-content:center;margin-top:90px;overflow:hidden;}
- .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600') center/cover;}
- .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,39,68,0.8),rgba(15,39,68,0.5));}
- .hero-content{position:relative;z-index:2;text-align:center;color:#fff;}
- .badge{display:inline-block;background:rgba(230,126,34,0.9);color:#fff;padding:5px 16px;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
- .hero-content h1{font-family:'Playfair Display',serif;font-size:2.8rem;margin-bottom:8px;}
- .container{max-width:1100px;margin:0 auto;padding:60px 32px;}
- .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;}
- .blog-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:block;}
- .blog-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,0.14);}
- .blog-card img{width:100%;height:200px;object-fit:cover;}
- .blog-body{padding:20px;}
- .blog-tag{font-size:0.72rem;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
- .blog-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;line-height:1.4;}
- .blog-excerpt{font-size:0.84rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
- .blog-meta{font-size:0.76rem;color:var(--muted);}
- footer{background:var(--navy);color:rgba(255,255,255,0.55);padding:40px 48px;text-align:center;margin-top:60px;}
- footer a{color:rgba(255,255,255,0.55);text-decoration:none;}
- </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Blog – Manali Escape | Himachal Pradesh Travel Guides</title>
+  <meta name="description" content="Expert travel guides, trekking tips, destination reviews and travel stories from Himachal Pradesh. Updated regularly by local travel experts."/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <link rel="canonical" href="https://manaliescape.com/blog"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Travel Blog – Manali Escape"/>
+  <meta property="og:description" content="Expert travel guides from Himachal Pradesh — Manali, Spiti, Shimla, Kasol and beyond."/>
+  <meta property="og:image" content="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200"/>
+  <meta property="og:url" content="https://manaliescape.com/blog"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9341453132646393" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/responsive.css"/>
+  <style>
+    :root{--navy:#0c1f3d;--orange:#e8622a;--gold:#c9a84c;--light:#f8f7f4;--muted:#6b7280;--white:#fff;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:#1f2937;background:var(--light);}
+    a{text-decoration:none;color:inherit;}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(12,31,61,.97);backdrop-filter:blur(12px);padding:0 5%;height:80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .logo img{height:62px;width:auto;mix-blend-mode:lighten;}
+    .logo span{color:#fff;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;}
+    nav ul{list-style:none;display:flex;gap:2px;flex-wrap:wrap;}
+    nav ul a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;font-weight:500;padding:7px 11px;border-radius:6px;transition:all .2s;}
+    nav ul a:hover,nav ul a.active{color:#fff;background:rgba(255,255,255,.12);}
+
+    /* HERO */
+    .blog-hero{margin-top:80px;background:linear-gradient(135deg,var(--navy) 0%,#1a3c5e 100%);padding:64px 5% 56px;text-align:center;position:relative;overflow:hidden;}
+    .blog-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1400&q=60') center/cover;opacity:.12;}
+    .blog-hero-content{position:relative;z-index:1;}
+    .blog-hero .eyebrow{display:inline-block;background:rgba(232,98,42,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:16px;}
+    .blog-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;margin-bottom:12px;}
+    .blog-hero p{color:rgba(255,255,255,.7);font-size:.97rem;max-width:520px;margin:0 auto;}
+
+    /* LAYOUT */
+    .blog-container{max-width:1300px;margin:0 auto;padding:56px 32px 80px;}
+
+    /* CATEGORY FILTERS */
+    .cat-filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+    .cat-btn{padding:8px 20px;border:1.5px solid #e5e7eb;background:#fff;border-radius:30px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:var(--muted);transition:all .2s;}
+    .cat-btn:hover,.cat-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+    /* FEATURED CARD (first card big) */
+    .featured-card{display:grid;grid-template-columns:1.4fr 1fr;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 32px rgba(0,0,0,.1);margin-bottom:40px;transition:transform .3s,box-shadow .3s;}
+    .featured-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.15);}
+    .fc-img{overflow:hidden;position:relative;min-height:380px;}
+    .fc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+    .featured-card:hover .fc-img img{transform:scale(1.05);}
+    .fc-badge{position:absolute;top:16px;left:16px;background:var(--orange);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;}
+    .fc-body{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;}
+    .fc-meta{display:flex;align-items:center;gap:14px;font-size:.76rem;color:var(--muted);margin-bottom:14px;}
+    .fc-body h2{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--navy);line-height:1.25;margin-bottom:14px;}
+    .fc-body p{font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:24px;}
+    .fc-read{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;padding:12px 26px;border-radius:8px;font-weight:600;font-size:.88rem;transition:all .25s;}
+    .fc-read:hover{background:#cf5520;gap:12px;}
+
+    /* BLOG GRID */
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+
+    /* BLOG CARD */
+    .blog-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;}
+    .blog-card:hover{transform:translateY(-7px);box-shadow:0 14px 40px rgba(0,0,0,.13);}
+    .bc-img{position:relative;overflow:hidden;height:220px;}
+    .bc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+    .blog-card:hover .bc-img img{transform:scale(1.07);}
+    .bc-cat{position:absolute;top:14px;left:14px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;color:#fff;}
+    .cat-guide{background:#e8622a;}
+    .cat-nature{background:#10b981;}
+    .cat-adventure{background:#3b82f6;}
+    .cat-update{background:#f59e0b;}
+    .cat-lakes{background:#8b5cf6;}
+    .bc-body{padding:20px 18px 22px;flex:1;display:flex;flex-direction:column;}
+    .bc-meta{display:flex;align-items:center;gap:10px;font-size:.73rem;color:var(--muted);margin-bottom:10px;}
+    .bc-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);}
+    .bc-body h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);line-height:1.35;margin-bottom:10px;flex:1;}
+    .bc-body p{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:16px;}
+    .bc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid #f3f4f6;}
+    .bc-author{display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--muted);}
+    .bc-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--navy),#1a3c5e);display:flex;align-items:center;justify-content:center;font-size:.8rem;}
+    .bc-arrow{color:var(--orange);font-size:.82rem;font-weight:700;transition:transform .2s;}
+    .blog-card:hover .bc-arrow{transform:translateX(4px);}
+
+    /* ADSENSE STRIP */
+    .ad-strip{padding:24px 0;text-align:center;}
+    .ad-strip p{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+
+    @media(max-width:1024px){.featured-card{grid-template-columns:1fr;}.fc-img{min-height:260px;}.blog-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){nav ul{display:none;}.blog-grid{grid-template-columns:1fr;}.blog-container{padding:36px 16px 60px;}.fc-body{padding:24px 20px;}.fc-body h2{font-size:1.4rem;}}
+  </style>
 </head>
 <body>
+
 <nav>
- <a class="logo" href="/"><img src="/images/logo.png" alt="Manali Escape" style="height:80px;width:auto;mix-blend-mode:lighten;" loading="lazy"/><span style="color:#fff;font-family:Playfair Display,serif;font-size:1.25rem;font-weight:700;">Manali Escape</span></a>
- <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
- <ul id="nav-menu">
- <li><a href="/">Home</a></li>
- <li><a href="/destinations">Destinations</a></li>
- <li><a href="/adventure">Treks</a></li>
- <li><a href="/blog/manali_waterfalls">Waterfalls</a></li>
- <li><a href="/blog">Travel Tips</a></li>
- <li><a href="/hotels">Hotels</a></li>
- <li><a href="/about">About</a></li>
- <li><a href="/contact">Contact</a></li>
- </ul>
+  <a class="logo" href="/">
+    <img src="/images/logo.png" alt="Manali Escape" width="62" height="62"/>
+    <span>Manali Escape</span>
+  </a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <ul id="nav-menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/destinations">Destinations</a></li>
+    <li><a href="/adventure">Treks</a></li>
+    <li><a href="/blog/manali_waterfalls">Waterfalls</a></li>
+    <li><a href="/blog" class="active">Travel Tips</a></li>
+    <li><a href="/hotels">Hotels</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
 </nav>
-<div class="hero">
- <div class="hero-bg"></div><div class="hero-overlay"></div>
- <div class="hero-content">
- <div class="badge">Travel Tips & Guides</div>
- <h1>Manali Escape Blog</h1>
- </div>
+
+<div class="blog-hero">
+  <div class="blog-hero-content">
+    <span class="eyebrow">Himalayan Travel Guides</span>
+    <h1>Stories from the Mountains</h1>
+    <p>Expert guides, real traveller tips, and on-the-ground reports from Himachal Pradesh.</p>
+  </div>
 </div>
-<div class="container">
- <div class="blog-grid">
- <a class="blog-card" href="/blog/rohtang-pass-guide">
- <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600" alt="Rohtang Pass" loading="lazy"/>
- <div class="blog-body">
- <div class="blog-tag">Travel Guide</div>
- <div class="blog-title">Complete Guide to Rohtang Pass 2026</div>
- <div class="blog-excerpt">Everything you need to know before visiting Rohtang Pass — permits, best time, what to expect, and tips.</div>
- <div class="blog-meta">📅 April 2026 &nbsp;·&nbsp; 5 min read</div>
- </div>
- </a>
- <a class="blog-card" href="/blog/chandratal-lake-guide">
- <img src="/images/chandratal-1.jpeg" alt="Chandratal Lake" loading="lazy"/>
- <div class="blog-body">
- <div class="blog-tag">Lakes & Nature</div>
- <div class="blog-title">Chandratal Lake – The Moon Lake of Spiti Valley</div>
- <div class="blog-excerpt">Complete guide to Chandratal Lake — how to reach, best time, camping, permits, and everything you need to know.</div>
- <div class="blog-meta">📅 June 2026 &nbsp;·&nbsp; 6 min read</div>
- </div>
- </a>
- <a class="blog-card" href="/blog/manali-traffic-june-2026">
- <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600" alt="Manali Traffic" loading="lazy"/>
- <div class="blog-body">
- <div class="blog-tag">यात्रा समाचार</div>
- <div class="blog-title">मनाली में पर्यटकों का सैलाब: अटल टनल और सोलंग वैली मार्ग पर घंटों लंबा जाम</div>
- <div class="blog-excerpt">मनाली में बढ़ती पर्यटकों की संख्या के कारण अटल टनल और सोलंग वैली मार्गों पर भारी ट्रैफिक जाम की स्थिति।</div>
- <div class="blog-meta">📅 June 2026 &nbsp;·&nbsp; 4 min read</div>
- </div>
- </a>
- <a class="blog-card" href="/blog/manali_waterfalls">
- <img src="/images/Jogini Waterfall.jpg" alt="मनाली के खूबसूरत झरने">
- <div class="blog-body">
- <div class="blog-tag">प्रकृति और पर्यटन</div>
- <div class="blog-title">मनाली के 4 सबसे खूबसूरत झरने: जोगिनी, रहाला, जाणा और सजला वाटरफॉल की संपूर्ण यात्रा गाइड</div>
- <div class="blog-excerpt">
- मनाली के प्रसिद्ध जोगिनी, रहाला, जाणा और सजला वाटरफॉल की पूरी जानकारी। जानें घूमने का सबसे अच्छा समय, पहुंचने का तरीका और जरूरी यात्रा सुझाव।
- </div>
- <div class="blog-meta">📅 June 2026 &nbsp;·&nbsp; 6 min read</div>
- </div>
-</a>
-<a class="blog-card" href="/blog/complete-manali-travel-guide-2026">
- <img src="/images/manali-travel-guide-2026.jpg" alt="Complete Manali Travel Guide 2026">
- <div class="blog-body">
- <div class="blog-tag">Travel Guide</div>
- <div class="blog-title">Complete Manali Travel Guide 2026 – Best Places, Budget, Hotels & Travel Tips</div>
- <div class="blog-excerpt">
- Planning a trip to Manali? Discover the best places to visit, how to reach, estimated budget, hotels, adventure activities, local food, travel tips, and the perfect itinerary for an unforgettable Himalayan vacation.
- </div>
- <div class="blog-meta">📅 June 2026 &nbsp;·&nbsp; 12 min read</div>
- </div>
-</a>
- </div>
-</div>
-<!-- ═══════════════════ PREMIUM FOOTER ═══════════════════ -->
-<div style="line-height:0;overflow:hidden;background:#f8f7f4;">
- <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;"><path d="M0,80 L0,40 L120,20 L240,50 L360,10 L480,45 L600,5 L720,35 L840,15 L960,50 L1080,20 L1200,55 L1320,25 L1440,60 L1440,80 Z" fill="#07131f"/></svg>
+
+<div class="blog-container">
+
+  <!-- Category Filters -->
+  <div class="cat-filters">
+    <button class="cat-btn active" data-cat="all">All Posts</button>
+    <button class="cat-btn" data-cat="guide">Travel Guides</button>
+    <button class="cat-btn" data-cat="nature">Nature</button>
+    <button class="cat-btn" data-cat="adventure">Adventure</button>
+    <button class="cat-btn" data-cat="update">Travel Updates</button>
+  </div>
+
+  <!-- Featured Article -->
+  <a class="featured-card" href="/blog/complete-manali-travel-guide-2026" data-cat="guide">
+    <div class="fc-img">
+      <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=900&q=80" alt="Complete Manali Travel Guide 2026 — snow mountains and valley" loading="eager" fetchpriority="high"/>
+      <span class="fc-badge">⭐ Editor's Pick</span>
+    </div>
+    <div class="fc-body">
+      <div class="fc-meta">
+        <span>🗺 Travel Guide</span>
+        <span>·</span>
+        <span>📅 June 2026</span>
+        <span>·</span>
+        <span>⏱ 15 min read</span>
+      </div>
+      <h2>Complete Manali Travel Guide 2026 — Everything You Need to Know</h2>
+      <p>The most comprehensive Manali travel guide online. Covers getting there, where to stay, best time to visit, budget breakdown, packing checklist, top places and insider tips from local experts.</p>
+      <span class="fc-read">Read Full Guide →</span>
+    </div>
+  </a>
+
+  <!-- AdSense -->
+  <div class="ad-strip">
+    <p>Advertisement</p>
+    <ins class="adsbygoogle" style="display:block;min-height:90px;" data-ad-client="ca-pub-9341453132646393" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <!-- Blog Grid -->
+  <div class="blog-grid" id="blog-grid">
+
+    <a class="blog-card" href="/blog/rohtang-pass-guide" data-cat="guide">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80" alt="Rohtang Pass snow-covered mountain pass Manali" loading="lazy"/>
+        <span class="bc-cat cat-guide">Pass Guide</span>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta"><span>📅 April 2026</span><span class="bc-meta-dot"></span><span>⏱ 7 min</span></div>
+        <h3>Complete Rohtang Pass Guide — Permits, Timing & What to Expect</h3>
+        <p>Everything about the legendary Rohtang Pass — online permits, best months, snow activities and common mistakes to avoid.</p>
+        <div class="bc-footer">
+          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
+          <span class="bc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="/blog/chandratal-lake-guide" data-cat="nature">
+      <div class="bc-img">
+        <img src="/images/chandratal-1.jpeg" alt="Chandratal Lake turquoise waters Spiti Valley Himachal Pradesh" loading="lazy"/>
+        <span class="bc-cat cat-lakes">Lake Guide</span>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta"><span>📅 May 2026</span><span class="bc-meta-dot"></span><span>⏱ 9 min</span></div>
+        <h3>Chandratal Lake — The Moon Lake of Spiti Valley</h3>
+        <p>Turquoise waters, star-lit skies and a dramatic journey through one of India's most remote high-altitude landscapes.</p>
+        <div class="bc-footer">
+          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
+          <span class="bc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="/blog/manali_waterfalls" data-cat="nature">
+      <div class="bc-img">
+        <img src="/images/Jogini Waterfall.jpg" alt="Jogini Waterfall cascading through cedar forest near Manali" loading="lazy"/>
+        <span class="bc-cat cat-nature">Waterfalls</span>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta"><span>📅 April 2026</span><span class="bc-meta-dot"></span><span>⏱ 6 min</span></div>
+        <h3>Best Waterfalls Near Manali — Hidden Gems of Kullu Valley</h3>
+        <p>Jogini, Rahala, Jana and Sajla — a complete guide to the most beautiful waterfalls near Manali.</p>
+        <div class="bc-footer">
+          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
+          <span class="bc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="/blog/manali-traffic-june-2026" data-cat="update">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1566408669374-5a6d5dca1ef5?w=600&q=80" alt="Manali road traffic during peak tourist season June 2026" loading="lazy"/>
+        <span class="bc-cat cat-update">Traffic Update</span>
+      </div>
+      <div class="bc-body">
+        <div class="bc-meta"><span>📅 June 2026</span><span class="bc-meta-dot"></span><span>⏱ 5 min</span></div>
+        <h3>Manali Traffic Update June 2026 — Roads, Atal Tunnel & Tips</h3>
+        <p>Real-time road conditions, Atal Tunnel timings, Rohtang permit rules and tips to avoid peak-season traffic jams.</p>
+        <div class="bc-footer">
+          <div class="bc-author"><div class="bc-avatar">🧑</div><span>Deepak Chauhan</span></div>
+          <span class="bc-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div><!-- /blog-grid -->
+
+</div><!-- /blog-container -->
+
+<!-- Premium Footer -->
+<div style="line-height:0;overflow:hidden;background:var(--light);">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;"><path d="M0,80 L0,40 L120,20 L240,50 L360,10 L480,45 L600,5 L720,35 L840,15 L960,50 L1080,20 L1200,55 L1320,25 L1440,60 L1440,80 Z" fill="#07131f"/></svg>
 </div>
 <footer class="pf" role="contentinfo">
- <div class="pf-inner">
- <div class="pf-col pf-about">
- <div class="pf-logo"><img src="/images/logo.png" alt="Manali Escape logo" width="56" height="56" loading="lazy"/><span>Manali Escape</span></div>
- <p>Your trusted travel companion to the soul of Himachal Pradesh. Explore Manali, Spiti, Shimla and beyond with local expertise.</p>
- <div class="pf-social">
- <a href="https://www.facebook.com/profile.php?id=61590384976570" target="_blank" rel="noopener" aria-label="Facebook" class="pf-soc-btn pf-fb">f</a>
- <a href="https://www.instagram.com/manaliescape/" target="_blank" rel="noopener" aria-label="Instagram" class="pf-soc-btn pf-ig">📷</a>
- <a href="https://wa.me/919805549992" target="_blank" rel="noopener" aria-label="WhatsApp" class="pf-soc-btn pf-wa">💬</a>
- </div>
- </div>
- <div class="pf-col">
- <h4>Quick Links</h4>
- <ul>
- <li><a href="/">🏠 Home</a></li>
- <li><a href="/destinations">📍 Destinations</a></li>
- <li><a href="/adventure">🥾 Treks</a></li>
- <li><a href="/blog/manali_waterfalls">💧 Waterfalls</a></li>
- <li><a href="/hotels">🏨 Hotels</a></li>
- <li><a href="/packages">🎒 Packages</a></li>
- <li><a href="/booking">📅 Book a Trip</a></li>
- <li><a href="/about">ℹ️ About Us</a></li>
- </ul>
- </div>
- <div class="pf-col">
- <h4>Latest Blogs</h4>
- <ul class="pf-blogs">
- <li><a href="/blog/complete-manali-travel-guide-2026">🗺 Complete Manali Guide 2026</a></li>
- <li><a href="/blog/rohtang-pass-guide">⛰ Rohtang Pass Guide</a></li>
- <li><a href="/blog/chandratal-lake-guide">🌙 Chandratal Lake Guide</a></li>
- <li><a href="/blog/manali_waterfalls">💧 Best Waterfalls Near Manali</a></li>
- <li><a href="/blog/manali-traffic-june-2026">🚗 Manali Traffic Update 2026</a></li>
- <li><a href="/blog">📖 View All Articles →</a></li>
- </ul>
- </div>
- <div class="pf-col pf-newsletter-col">
- <h4>Stay Updated</h4>
- <p style="font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:14px;">Get weekly travel tips and seasonal guides.</p>
- <form class="pf-nl-form" onsubmit="return false;">
- <input type="email" placeholder="Your email address" aria-label="Newsletter email" required/>
- <button type="submit">Subscribe</button>
- </form>
- <div class="pf-contact" style="margin-top:24px;">
- <h4>Contact</h4>
- <p>📍 Ward No. 4, Village Siyal<br>Post Office Manali, PIN 175131</p>
- <p><a href="tel:+919805549992">📞 +91 98055 49992</a></p>
- <p><a href="mailto:deepakchauhan628@gmail.com">✉️ deepakchauhan628@gmail.com</a></p>
- <p><a href="https://manaliescape.com">🌐 manaliescape.com</a></p>
- </div>
- </div>
- </div>
- <div class="pf-bar">
- <div class="pf-bar-inner">
- <span>© 2026 Manali Escape. All rights reserved.</span>
- <div class="pf-bar-links">
- <a href="/privacy-policy">Privacy Policy</a>
- <a href="/about">About Us</a>
- <a href="/contact">Contact</a>
- </div>
- </div>
- </div>
+  <div class="pf-inner">
+    <div class="pf-col pf-about">
+      <div class="pf-logo"><img src="/images/logo.png" alt="Manali Escape logo" width="56" height="56"/><span>Manali Escape</span></div>
+      <p>Your trusted travel companion to the soul of Himachal Pradesh. Explore Manali, Spiti, Shimla and beyond.</p>
+      <div class="pf-social">
+        <a href="https://www.facebook.com/profile.php?id=61590384976570" target="_blank" rel="noopener" aria-label="Facebook" class="pf-soc-btn pf-fb">f</a>
+        <a href="https://www.instagram.com/manaliescape/" target="_blank" rel="noopener" aria-label="Instagram" class="pf-soc-btn pf-ig">📷</a>
+        <a href="https://wa.me/919805549992" target="_blank" rel="noopener" aria-label="WhatsApp" class="pf-soc-btn pf-wa">💬</a>
+      </div>
+    </div>
+    <div class="pf-col"><h4>Quick Links</h4><ul>
+      <li><a href="/">🏠 Home</a></li><li><a href="/destinations">📍 Destinations</a></li>
+      <li><a href="/adventure">🥾 Treks</a></li><li><a href="/hotels">🏨 Hotels</a></li>
+      <li><a href="/packages">🎒 Packages</a></li><li><a href="/booking">📅 Book Trip</a></li>
+    </ul></div>
+    <div class="pf-col"><h4>Latest Blogs</h4><ul class="pf-blogs">
+      <li><a href="/blog/complete-manali-travel-guide-2026">🗺 Manali Guide 2026</a></li>
+      <li><a href="/blog/rohtang-pass-guide">⛰ Rohtang Pass</a></li>
+      <li><a href="/blog/chandratal-lake-guide">🌙 Chandratal Lake</a></li>
+      <li><a href="/blog/manali_waterfalls">💧 Manali Waterfalls</a></li>
+    </ul></div>
+    <div class="pf-col pf-newsletter-col">
+      <h4>Stay Updated</h4>
+      <form class="pf-nl-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email address" aria-label="Newsletter email" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="pf-contact" style="margin-top:20px;">
+        <h4>Contact</h4>
+        <p>📍 Manali, HP 175131</p>
+        <p><a href="tel:+919805549992">📞 +91 98055 49992</a></p>
+        <p><a href="mailto:deepakchauhan628@gmail.com">✉️ deepakchauhan628@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="pf-bar"><div class="pf-bar-inner">
+    <span>© 2026 Manali Escape. All rights reserved.</span>
+    <div class="pf-bar-links"><a href="/privacy-policy">Privacy Policy</a><a href="/about">About Us</a><a href="/contact">Contact</a></div>
+  </div></div>
 </footer>
+
 <script>
- (function(){
- var toggle = document.getElementById("nav-toggle");
- var menu = document.getElementById("nav-menu");
- if (!toggle || !menu) return;
- toggle.addEventListener("click", function() { toggle.classList.toggle("open"); menu.classList.toggle("open"); });
- menu.querySelectorAll("a").forEach(function(a) { a.addEventListener("click", function() { toggle.classList.remove("open"); menu.classList.remove("open"); }); });
- })();
+// Nav toggle
+(function(){
+  var t=document.getElementById('nav-toggle'),m=document.getElementById('nav-menu');
+  if(t&&m){t.addEventListener('click',function(){t.classList.toggle('open');m.classList.toggle('open');});}
+})();
+
+// Category filter
+document.querySelectorAll('.cat-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var cat=btn.getAttribute('data-cat');
+    document.querySelectorAll('.blog-card,.featured-card').forEach(function(card){
+      card.style.display=(cat==='all'||card.getAttribute('data-cat')===cat)?'':'none';
+    });
+  });
+});
+
+// AdSense
+try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}
 </script>
 <script src="/chatbox.js"></script>
 </body>
