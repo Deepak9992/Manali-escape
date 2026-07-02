@@ -53,6 +53,15 @@ router.post('/contact', contactController.submit);
 // AI Chat
 router.post('/api/chat', chatController.chat);
 
+// ── Blog API (auto-reads from blogService) ─────────────────────────────────
+const { getLatestBlogs } = require('../services/blogService');
+
+router.get('/api/blogs', (req, res) => {
+  const limit = parseInt(req.query.limit) || 0;
+  const blogs = getLatestBlogs(limit);
+  res.json({ success: true, count: blogs.length, data: blogs });
+});
+
 // ── Blog (dynamic) ─────────────────────────────────────────────────────────────
 router.get('/blog', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/blogs/index.html'));
